@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_radarnet_behav/xsimk.exe -simmode gui -wdb tb_radarnet_behav.wdb -simrunnum 0 -socket 60677
+Design successfully loaded
+Design Loading Memory Usage: 11260 KB (Peak: 11260 KB)
+Design Loading CPU Usage: 62 ms
+Simulation completed
+Simulation Memory Usage: 14504 KB (Peak: 14504 KB)
+Simulation CPU Usage: 186 ms
