@@ -1,0 +1,16 @@
+L1_conv_in_bias 0.0013150709
+L1_conv_in 0.0181917995
+L2_conv_down_bias 0.0180653427
+L2_conv_down 0.0081908172
+L3_res1_conv1_bias 0.0109378127
+L3_res1_conv1 0.0064817700
+L4_res1_conv2_bias 0.0112500107
+L4_res1_conv2 0.0063112206
+L5_res2_conv1_bias 0.0107679209
+L5_res2_conv1 0.0036695958
+L6_res2_conv2_bias 0.0209608842
+L6_res2_conv2 0.0158789363
+L5_res2_proj_bias 0.0143579310
+L5_res2_proj 0.0056051086
+L8_fc_bias 0.0006942958
+L8_fc 0.0118656373
