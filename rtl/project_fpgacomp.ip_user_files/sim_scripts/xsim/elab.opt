@@ -1,0 +1,1 @@
+--incr --debug typical --relax --mt 2  -L xil_defaultlib -L xpm -L blk_mem_gen_v8_4_12 -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_radarnet xil_defaultlib.tb_radarnet xil_defaultlib.glbl -log elaborate.log
