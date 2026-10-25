@@ -21,6 +21,7 @@
  */
 module rn_top #(
     parameter W            = 8,
+    parameter NUM_CLASSES  = 4,                // must match the exported layer table
     parameter PE_DSP       = (W * W <= 128),   // DSP48 multipliers if they fit
     parameter WEIGHTS_FILE = "weights.mem",
     parameter PARAMS_FILE  = "params.mem"
@@ -33,11 +34,12 @@ module rn_top #(
     output reg           busy,
     output reg           done,
     output reg           result_valid,
-    output reg  [1:0]    class_id,
+    output reg  [((NUM_CLASSES > 2) ? $clog2(NUM_CLASSES) : 1)-1:0] class_id,
     output wire          anomaly_flag,
     output reg  [31:0]   cycle_count,      // start → result_valid, incl. load
-    output reg  [127:0]  logits            // 4 × int32 (debug / verification)
+    output reg  [32*NUM_CLASSES-1:0] logits   // int32 per class (debug / verification)
 );
+    localparam CW        = (NUM_CLASSES > 2) ? $clog2(NUM_CLASSES) : 1;
     localparam LV        = $clog2(W);
     localparam SUMW      = 16 + LV;
     localparam ACCW      = 24;
@@ -64,7 +66,9 @@ module rn_top #(
     reg [15:0] d_wb, d_pb, d_ms;
     reg [5:0]  d_sh;
     reg [4:0]  d_sk;
+`define RN_LAYER_TABLE
     `include "layer_table.vh"
+`undef RN_LAYER_TABLE
 
     // Registered copy of the descriptor: constant for a whole layer, so the
     // one-cycle lag (absorbed by S_INIT) takes the table decode off every path.
@@ -88,6 +92,9 @@ module rn_top #(
 
     generate if (EXPORT_LANES != W) begin : lanes_mismatch
         ERROR_layer_table_exported_for_different_W u_err();
+    end endgenerate
+    generate if (EXPORT_CLASSES != NUM_CLASSES) begin : classes_mismatch
+        ERROR_layer_table_exported_for_different_NUM_CLASSES u_err();
     end endgenerate
 
     // ── Weight / parameter ROMs ─────────────────────────────────────
@@ -181,6 +188,7 @@ module rn_top #(
     reg signed [ACCW-1:0] acc [0:W-1];
     reg            f_v;
     reg [AW-1:0]   f_dst;
+    reg [7:0]      f_og;
     reg            r0_v, r1_v, r2_v, r3_v;
     reg [AW-1:0]   r0_dst, r1_dst, r2_dst, r3_dst;
     reg signed [ACCW-1:0] r0_acc [0:W-1];
@@ -212,6 +220,7 @@ module rn_top #(
         // E: accumulate
         f_v   <= e_v & e_lst;
         f_dst <= e_dst;
+        f_og  <= e_og;
         for (o = 0; o < W; o = o + 1) begin
             if (e_v) begin
                 acc_nxt = (e_fst ? 0 : acc[o]) + $signed(pe_sum[SUMW*o +: SUMW]);
@@ -259,11 +268,13 @@ module rn_top #(
         end
     end
 
-    // FC logits: raw acc + bias of lanes 0..3, captured at R1
+    // FC logits: raw acc + bias, class c = output group c/W, lane c%W
+    integer c;
     always @(posedge clk)
         if (f_v && q_raw)
-            for (o = 0; o < 4; o = o + 1)
-                logits[32*o +: 32] <= acc[o] + $signed(p_q[48*o +: 24]);
+            for (c = 0; c < NUM_CLASSES; c = c + 1)
+                if (f_og == c / W)
+                    logits[32*c +: 32] <= acc[c % W] + $signed(p_q[48*(c % W) +: 24]);
 
     // ── GAP ─────────────────────────────────────────────────────────
     wire [AW-1:0]  gap_raddr, gap_waddr;
@@ -295,13 +306,12 @@ module rn_top #(
     end
 
     // ── Argmax over int32 logits (first maximum wins, as numpy) ─────
-    // Two registered compare stages (S_AMAX1, S_AMAX2) keep this off the
-    // critical path; strict '>' keeps the lower index on ties.
-    reg [1:0]         am_i01, am_i23;
-    reg signed [31:0] am_v01, am_v23;
-    wire signed [31:0] lg0 = logits[31:0],  lg1 = logits[63:32],
-                       lg2 = logits[95:64], lg3 = logits[127:96];
-    assign anomaly_flag = result_valid && (class_id != 2'd0);
+    // Sequential: one 32-bit compare per cycle (NUM_CLASSES cycles) keeps it
+    // off the critical path; strict '>' keeps the lower index on ties.
+    reg [CW-1:0]      am_i, am_j;
+    reg signed [31:0] am_v;
+    wire signed [31:0] lg_j = logits[32*am_j +: 32];
+    assign anomaly_flag = result_valid && (class_id != 0);
 
     // ── Sequencer ───────────────────────────────────────────────────
     integer p;
@@ -391,17 +401,18 @@ module rn_top #(
             S_GAP: if (gap_done) begin layer <= NUM_LAYERS - 1; state <= S_INIT; end
 
             S_AMAX1: begin
-                if (lg1 > lg0) begin am_i01 <= 1; am_v01 <= lg1; end
-                else           begin am_i01 <= 0; am_v01 <= lg0; end
-                if (lg3 > lg2) begin am_i23 <= 3; am_v23 <= lg3; end
-                else           begin am_i23 <= 2; am_v23 <= lg2; end
+                am_v <= logits[31:0]; am_i <= 0; am_j <= 1;
                 state <= S_AMAX2;
             end
 
             S_AMAX2: begin
-                class_id <= (am_v23 > am_v01) ? am_i23 : am_i01;
-                result_valid <= 1; done <= 1; busy <= 0;
-                state <= S_IDLE;
+                if (lg_j > am_v) begin am_v <= lg_j; am_i <= am_j; end
+                if (am_j == NUM_CLASSES - 1) begin
+                    class_id <= (lg_j > am_v) ? am_j : am_i;
+                    result_valid <= 1; done <= 1; busy <= 0;
+                    state <= S_IDLE;
+                end else
+                    am_j <= am_j + 1;
             end
             default: state <= S_IDLE;
             endcase

@@ -67,6 +67,33 @@ def load_dataset(hdf5_path: str):
     return X, Y_onehot, Z_snr
 
 
+def load_filtered(hdf5_path: str, threshold: int, time_steps: int,
+                  chunk: int = 65536):
+    """
+    Streaming equivalent of load_dataset → filter_snr → slice: reads the 21 GB
+    file in chunks and keeps only rows with SNR >= threshold and the first
+    `time_steps` samples. Produces exactly the arrays (same rows, same order)
+    as the in-memory path, using ~2 GB of RAM instead of ~25 GB.
+    """
+    print(f"[1/6] Streaming dataset from {hdf5_path} …")
+    with h5py.File(hdf5_path, "r") as f:
+        Y_onehot = f["Y"][:]
+        Z_snr = f["Z"][:, 0]
+        mask = Z_snr >= threshold
+        n = len(mask)
+        X = np.empty((int(mask.sum()), time_steps, 2), dtype=np.float32)
+        k = 0
+        for i in range(0, n, chunk):
+            m = mask[i:i + chunk]
+            if m.any():
+                xb = f["X"][i:i + chunk, :time_steps, :][m]
+                X[k:k + len(xb)] = xb
+                k += len(xb)
+            print(f"    {min(i + chunk, n):,} / {n:,} rows read", end="\r")
+    print(f"\n    Kept {k:,} / {n:,} samples with SNR >= {threshold} dB")
+    return X, Y_onehot[mask], Z_snr[mask]
+
+
 def map_labels(Y_onehot: np.ndarray) -> np.ndarray:
     """Convert 24-class one-hot labels to 4-class integer defense labels."""
     print("[2/6] Mapping 24 modulation classes → 4 defense anomaly classes …")
@@ -163,9 +190,8 @@ def main():
     )
     args = parser.parse_args()
 
-    X, Y_onehot, Z_snr = load_dataset(args.hdf5)
+    X, Y_onehot, _ = load_filtered(args.hdf5, SNR_THRESHOLD, TIME_STEPS)
     y = map_labels(Y_onehot)
-    X, y, _ = filter_snr(X, y, Z_snr, SNR_THRESHOLD)
     X = slice_and_normalise(X, TIME_STEPS)
     X, y = balance_classes(X, y, SAMPLES_PER_CLASS, args.seed)
     split_and_save(X, y, args.out_dir, args.seed)

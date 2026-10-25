@@ -40,19 +40,31 @@ rtl_v2/vivado/run_impl.sh 8 5      # W, clock period in ns → rtl_v2/build/impl
 
 ## Results
 
-Setup: xc7z020clg484-1, Vivado 2025.2, out-of-context place & route with a 5 ns constraint.
-Fmax = 1 / (5 ns − WNS). Cycles are measured by the DUT counter from `start` to
-`result_valid`, including the 128-cycle frame load. Power is the vectorless Vivado estimate,
-with dynamic power scaled to Fmax. Energy = power × latency.
+**Timing method.**
+* *Out-of-context (OOC):* xc7z020clg484-1, Vivado 2025.2, place & route with the clock
+  on a global buffer (`HD.CLK_SRC`). Each width is re-implemented **at the frequency
+  reported** and counts only if the internal register-to-register paths meet setup **and**
+  hold. Port paths of a bare module have no real driver; the I/O boundary is checked in
+  the full system build instead.
+* *System:* the ZedBoard build (PS7 + AXI + accelerator) meets all constraints at
+  **142.86 MHz** (WNS +0.385 ns, WHS +0.053 ns). All measured latency and energy use the
+  system clock.
 
-| Design | MAC/cycle | Cycles | Fmax (MHz) | Latency | LUT | FF | BRAM | DSP | Power (W) | Energy/inf |
-|---|---|---|---|---|---|---|---|---|---|---|
-| original `rtl/` | 0.5 | 2,376,786 | 72.2 | 32.9 ms | 10,012 | 5,461 | 15 | 0 | 0.671 | 22.1 mJ |
-| v2, W=4  | 16  | 76,121 | 181.6 | 419 µs | 1,563 | 1,394 | 11.5 | 28 | 0.28 | 118 µJ |
-| **v2, W=8**  | 64  | 20,313 | 180.9 | **112 µs** | 2,682 | 2,927 | 14 | 104 | 0.58 | **65 µJ** |
-| v2, W=16 | 256 | 5,853  | 149.0 | 39 µs  | 25,107 | 14,864 | 41.5 | 32 | 1.53 | 60 µJ |
+Cycles are measured by the DUT counter from `start` to `result_valid`, including the
+128-cycle frame load. Power is the vectorless Vivado estimate from the 200 MHz runs.
 
-* **Correctness.** All v2 points match `int_quant.py` bit-exactly: 50/50 test vectors, all INT32 logits.
+| Design | MAC/cycle | Cycles | Timing closed at (OOC) | Latency at that clock | Latency @ 142.86 MHz (system) | LUT | FF | BRAM | DSP |
+|---|---|---|---|---|---|---|---|---|---|
+| original `rtl/` | 0.5 | 2,376,786 | (72.2 MHz est.) | 32.9 ms | – | 10,012 | 5,461 | 15 | 0 |
+| v2, W=4  | 16  | 76,123 | 169.5 MHz | 449 µs | 533 µs | 1,552 | 1,274 | 11.5 | 28 |
+| **v2, W=8**  | 64  | 20,315 | **175.4 MHz** | **116 µs** | **142 µs** | 2,671 | 2,709 | 14 | 104 |
+| v2, W=16 | 256 | 5,855  | (rerun pending) | – | 41 µs | 25,121 | 14,864 | 41.5 | 32 |
+
+The ROMs hold the calibration from the training split (`checkpoints/radarnet_intq.npz`). On the
+paper's 30,000-sample test set, that integer model scores **83.18%**, against **83.26%** in FP32
+(−0.08 pp).
+
+* **Correctness.** All v2 points match `int_quant.py` bit-exactly: 50/50 test vectors, all INT32 logits. The 7-class Option A model is also verified, at W=4 and W=8.
 * **Original design.** It fails its own testbench. Its cycle count is read from its own simulation; Fig. 3 of the submitted paper shows `total_cycles = 0x244452`.
 * **W=16** exceeds the DSP budget for the PE multipliers (256 > 220), so it builds them from LUTs. That limits its Fmax and makes it LUT-heavy. W=8 is the efficiency sweet spot.
 * **Power figures** are estimates. Before publication, confirm them with SAIF-annotated power or a ZedBoard current measurement.
