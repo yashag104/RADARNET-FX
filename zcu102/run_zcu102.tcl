@@ -24,30 +24,38 @@ proc word {i} {
     return $v
 }
 
+# Every step is announced and timed, so a hang shows exactly where it stops.
+proc step {n msg cmd} {
+    say [format "\[%s\] step %-2s %s ..." [clock format [clock seconds] -format %H:%M:%S] $n $msg]
+    if {[catch {uplevel 1 $cmd} res]} {
+        say "*** step $n FAILED: $res"
+        say "targets now:"; catch {say [targets]}
+        exit 1
+    }
+    return $res
+}
+
 say "=== RadarNet-1D on ZCU102 ==="
-connect
-targets -set -nocase -filter {name =~ "APU*"}
-rst -system
-after 3000
-say "programming FPGA: $BIT"
-fpga -file $BIT
-targets -set -nocase -filter {name =~ "APU*"}
-loadhw -hw $XSA -mem-ranges [list {0x80000000 0xbfffffff} {0x400000000 0x5ffffffff} \
-                                  {0x1000000000 0x7fffffffff}] -regs
-configparams force-mem-access 1
-source $INIT
-psu_init
-after 1000
-psu_ps_pl_isolation_removal
-after 1000
-psu_ps_pl_reset_config
-catch {psu_protection}
-targets -set -nocase -filter {name =~ "*A53*#0"}
-rst -processor -clear-registers
-dow $ELF
-configparams force-mem-access 0
+step 1  "connect to hw_server"            {connect}
+say [targets]
+step 2  "select APU, system reset"        {targets -set -nocase -filter {name =~ "APU*"}; rst -system; after 3000}
+step 3  "program FPGA $BIT"               {fpga -file $BIT}
+step 4  "load hardware description (xsa)" {targets -set -nocase -filter {name =~ "APU*"}
+    loadhw -hw $XSA -mem-ranges [list {0x80000000 0xbfffffff} {0x400000000 0x5ffffffff} \
+                                      {0x1000000000 0x7fffffffff}] -regs
+    configparams force-mem-access 1}
+step 5  "reset A53 core 0"                {targets -set -nocase -filter {name =~ "*A53*#0"}; rst -processor}
+step 6  "source psu_init.tcl"             {source $INIT}
+step 7  "psu_init (clocks, DDR, MIO)"     {targets -set -nocase -filter {name =~ "APU*"}; psu_init}
+step 8  "remove PS-PL isolation"          {after 1000; psu_ps_pl_isolation_removal; after 1000; psu_ps_pl_reset_config}
+step 9  "PS protection config"            {catch {psu_protection}}
+step 10 "reset A53 core 0 again"          {targets -set -nocase -filter {name =~ "*A53*#0"}; rst -processor -clear-registers}
+step 11 "download rn_bench.elf"           {dow $ELF}
+step 12 "check accelerator INFO register" {configparams force-mem-access 0
+    targets -set -nocase -filter {name =~ "APU*"}
+    say [format "  INFO @0xA0000014 = 0x%08X (expect 0x524E0410)" [mrd -value 0xA0000014]]}
+step 13 "start program"                   {targets -set -nocase -filter {name =~ "*A53*#0"}; con}
 say "running benchmark (about 1 minute) ..."
-con
 
 set t0 [clock seconds]
 while {[word 0] != 0x524E4231} {

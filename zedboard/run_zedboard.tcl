@@ -23,21 +23,28 @@ proc word {i} {
     return $v
 }
 
+# Every step is announced and timed, so a hang shows exactly where it stops.
+proc step {n msg cmd} {
+    say [format "\[%s\] step %-2s %s ..." [clock format [clock seconds] -format %H:%M:%S] $n $msg]
+    if {[catch {uplevel 1 $cmd} res]} {
+        say "*** step $n FAILED: $res"
+        say "targets now:"; catch {say [targets]}
+        exit 1
+    }
+    return $res
+}
+
 say "=== RadarNet-1D on ZedBoard ==="
-connect
-targets -set -nocase -filter {name =~ "APU*"}
-rst -system
-after 1000
-say "programming FPGA: $BIT"
-fpga -file $BIT
-source $PS7
-ps7_init
-ps7_post_config
-targets -set -nocase -filter {name =~ "*Cortex-A9*#0"}
-rst -processor
-dow $ELF
+step 1 "connect to hw_server"            {connect}
+say [targets]
+step 2 "select APU, system reset"        {targets -set -nocase -filter {name =~ "APU*"}; rst -system; after 1000}
+step 3 "program FPGA $BIT"               {fpga -file $BIT}
+step 4 "source + run ps7_init"           {source $PS7; ps7_init; ps7_post_config}
+step 5 "reset Cortex-A9 core 0"          {targets -set -nocase -filter {name =~ "*Cortex-A9*#0"}; rst -processor}
+step 6 "download rn_bench.elf"           {dow $ELF}
+step 7 "check accelerator INFO register" {say [format "  INFO @0x43C00014 = 0x%08X (expect 0x524E0408)" [mrd -value 0x43C00014]]}
+step 8 "start program"                   {con}
 say "running benchmark (about 1 minute) ..."
-con
 
 set t0 [clock seconds]
 while {[word 0] != 0x524E4231} {
