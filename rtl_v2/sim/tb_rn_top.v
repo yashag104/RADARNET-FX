@@ -39,10 +39,18 @@ module tb_rn_top;
     integer v, s, j, n_exact, n_cls, n_true, fd;
     reg ok;
     initial begin
+`ifdef RN_VIVADO_SIM
+        // Vivado copies .mem files into the xsim run directory
+        $readmemh("input_vectors.mem", in_mem);
+        $readmemh("golden_logits.mem", lg_words);
+        $readmemh("golden_class.mem",  gold_cls);
+        $readmemh("true_labels.mem",   true_cls);
+`else
         $readmemh("input_vectors.hex", in_mem);
         $readmemh("golden_logits.hex", lg_words);
         $readmemh("golden_class.hex",  gold_cls);
         $readmemh("true_labels.hex",   true_cls);
+`endif
         for (v = 0; v < NUM_VECTORS; v = v + 1)
             for (j = 0; j < NC; j = j + 1)
                 gold_lg[v][32*j +: 32] = lg_words[NC*v + j];

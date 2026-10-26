@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  -i "../../../../../mem" --include "D:/2025.2/Vivado/data/rsb/busdef" --include "../../../../../mem" -d "RN_VIVADO_SIM" \
+"../../../../../../rtl_v2/src/rn_buf.v" \
+"../../../../../../rtl_v2/src/rn_gap.v" \
+"../../../../../../rtl_v2/src/rn_pe_array.v" \
+"../../../../../../rtl_v2/src/rn_top.v" \
+"../../../../../../rtl_v2/sim/tb_rn_top.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

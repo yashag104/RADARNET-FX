@@ -1,0 +1,25 @@
+Time resolution is 1 ps
+vec 0:    MATCH cls=2 gold=2 cycles=20315
+    logit0  rtl=-4536  gold=-4536
+    logit1  rtl=-5070  gold=-5070
+    logit2  rtl=847  gold=847
+    logit3  rtl=-2221  gold=-2221
+vec 1:    MATCH cls=0 gold=0 cycles=20315
+    logit0  rtl=13084  gold=13084
+    logit1  rtl=-7002  gold=-7002
+    logit2  rtl=-1899  gold=-1899
+    logit3  rtl=-6263  gold=-6263
+vec 2:    MATCH cls=3 gold=3 cycles=20315
+    logit0  rtl=-19657  gold=-19657
+    logit1  rtl=-4703  gold=-4703
+    logit2  rtl=-35781  gold=-35781
+    logit3  rtl=13546  gold=13546
+==================================================
+ W=8  vectors=50
+ bit-exact logits : 50 / 50
+ class == golden  : 50 / 50
+ class == true    : 44 / 50
+ latency (cycles) : 20315  (start -> result_valid, incl. 128-cycle load)
+==================================================
+PASS
+$finish called at time : 10158560 ns : File "C:/Users/hp/RADARNET-FX/rtl_v2/sim/tb_rn_top.v" Line 94

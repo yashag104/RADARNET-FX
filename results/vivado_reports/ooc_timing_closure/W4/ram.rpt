@@ -1,0 +1,145 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sun Oct 25 11:13:53 2026
+| Host         : SaY-PC running 64-bit major release  (build 9200)
+| Command      : report_ram_utilization -file ram.rpt
+| Design       : rn_top
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+RAM Usage Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Memory Description
+3. Memory Utilization - Inferred
+4. Memory Performance - Inferred
+5. Block Ram / URAM Memory Power - Inferred
+
+1. Summary
+----------
+
++--------------------------+------------+-----------+-------+-----------+
+| Memory Type              | Total Used | Available | Util% | Inferred% |
++--------------------------+------------+-----------+-------+-----------+
+| BlockRAM                 |       11.5 |       140 |  8.21 |    100.00 |
+|  RAMB36E1                |         10 |           |       |    100.00 |
+|  RAMB18E1                |          3 |           |       |    100.00 |
+| LUTMs as Distributed RAM |          0 |     17400 |  0.00 |      0.00 |
++--------------------------+------------+-----------+-------+-----------+
+*  Each RAMB18 is calculated as 0.5 BlockRAM
+**  Tables 2, 3, 4 and 5 cover RAMs inferred by Vivado Synthesis using XPMs or RTL inference
+***  XRAMs are not reported for detailed tables
+
+
+2. Memory Description
+---------------------
+
++------------------------+------------+-----------+-------------+-------------------------+------------------------+
+| Memory Name            | Array Size | RAM_STYLE | Memory Type | Port 1 Dimension / Map  | Port 2 Dimension / Map |
++------------------------+------------+-----------+-------------+-------------------------+------------------------+
+| w_q                    |     262144 |           | RAM_SP      |                         | 2048x128               |
+|  w_q_reg_0             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_1             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_2             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_3             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_4             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_5             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_6             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+|  w_q_reg_7             |      32768 |      NONE |             |                         |  A:A:2048x16           |
+| fbuf[0].u_buf/mem      |      16384 |           | RAM_SDP     | 512x32                  | 512x32                 |
+|  fbuf[0].u_buf/mem_reg |      16384 |     BLOCK |             |  B:B:512x32             |  A:A:512x32            |
+| fbuf[1].u_buf/mem      |      16384 |           | RAM_SDP     | 512x32                  | 512x32                 |
+|  fbuf[1].u_buf/mem_reg |      16384 |     BLOCK |             |  B:B:512x32             |  A:A:512x32            |
+| fbuf[2].u_buf/mem      |      16384 |           | RAM_SDP     | 512x32                  | 512x32                 |
+|  fbuf[2].u_buf/mem_reg |      16384 |     BLOCK |             |  B:B:512x32             |  A:A:512x32            |
+| p_q                    |      16256 |           | RAM_TDP     |                         | 77x127                 |
+|  p_q_reg_0             |       5544 |      NONE |             |  A:A:128x36 B:B:128x36  |                        |
+|  p_q_reg_1             |       4235 |      NONE |             |  A:A:128x36 B:B:128x19  |                        |
++------------------------+------------+-----------+-------------+-------------------------+------------------------+
+
+
+3. Memory Utilization - Inferred
+--------------------------------
+
++------------------------+-----------+-----------+----------------+-----------+-----------+---------+---------------+---------------+---------+---------------+---------------+---------+---------------+---------------+---------+---------------+---------------+
+| Memory Name            | Primitive | RAM STYLE | Available Bits | Used Bits | Bit Util% | A Depth | A Depth Avail | A Depth Util% | A Width | A Width Avail | A Width Util% | B Depth | B Depth Avail | B Depth Util% | B Width | B Width Avail | B Width Util% |
++------------------------+-----------+-----------+----------------+-----------+-----------+---------+---------------+---------------+---------+---------------+---------------+---------+---------------+---------------+---------+---------------+---------------+
+| w_q                    |           |           |                |           |           |         |               |               |         |               |               |         |               |               |         |               |               |
+|  w_q_reg_0             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_1             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_2             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_3             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_4             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_5             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_6             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+|  w_q_reg_7             | RAMB36E1  |      NONE |          36864 |     32768 |     88.89 |    2048 |          2048 |        100.00 |      16 |            18 |         88.89 |         |               |               |         |               |               |
+| fbuf[0].u_buf/mem      |           |           |                |           |           |         |               |               |         |               |               |         |               |               |         |               |               |
+|  fbuf[0].u_buf/mem_reg | RAMB18E1  |     BLOCK |          18432 |     16384 |     88.89 |     512 |           512 |        100.00 |      32 |            36 |         88.89 |     512 |           512 |        100.00 |      32 |            36 |         88.89 |
+| fbuf[1].u_buf/mem      |           |           |                |           |           |         |               |               |         |               |               |         |               |               |         |               |               |
+|  fbuf[1].u_buf/mem_reg | RAMB18E1  |     BLOCK |          18432 |     16384 |     88.89 |     512 |           512 |        100.00 |      32 |            36 |         88.89 |     512 |           512 |        100.00 |      32 |            36 |         88.89 |
+| fbuf[2].u_buf/mem      |           |           |                |           |           |         |               |               |         |               |               |         |               |               |         |               |               |
+|  fbuf[2].u_buf/mem_reg | RAMB18E1  |     BLOCK |          18432 |     16384 |     88.89 |     512 |           512 |        100.00 |      32 |            36 |         88.89 |     512 |           512 |        100.00 |      32 |            36 |         88.89 |
+| p_q                    |           |           |                |           |           |         |               |               |         |               |               |         |               |               |         |               |               |
+|  p_q_reg_0             | RAMB36E1  |      NONE |          36864 |      9216 |     25.00 |     128 |          1024 |         12.50 |      36 |            36 |        100.00 |     128 |          1024 |         12.50 |      36 |            36 |        100.00 |
+|  p_q_reg_1             | RAMB36E1  |      NONE |          36864 |      7040 |     19.10 |     128 |          1024 |         12.50 |      36 |            36 |        100.00 |     128 |          1024 |         12.50 |      19 |            36 |         52.78 |
++------------------------+-----------+-----------+----------------+-----------+-----------+---------+---------------+---------------+---------+---------------+---------------+---------+---------------+---------------+---------+---------------+---------------+
+
+
+4. Memory Performance - Inferred
+--------------------------------
+
++------------------------+-----------+-------------------------+------------------------+-------------+-------------------------+-------------+-------------------------+-----------+--------+--------+---------+-----------+--------+--------+---------+
+| Memory Name            | Primitive | Port 1 Dimension / Map  | Port 2 Dimension / Map | Port A Type | Port A Requirement (ns) | Port B Type | Port B Requirement (ns) | A Cascade | IREG_A | OREG_A | DOA_REG | B Cascade | IREG_B | OREG_B | DOB_REG |
++------------------------+-----------+-------------------------+------------------------+-------------+-------------------------+-------------+-------------------------+-----------+--------+--------+---------+-----------+--------+--------+---------+
+| w_q                    |           |                         | 2048x128               |             |                         |             |                         |           |        |        |         |           |        |        |         |
+|  w_q_reg_0             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_1             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_2             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_3             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_4             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_5             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_6             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+|  w_q_reg_7             | RAMB36E1  |                         |  A:A:2048x16           |        Read |                     5.9 |             |                         |           |        |        |       0 |           |        |        |         |
+| fbuf[0].u_buf/mem      |           | 512x32                  | 512x32                 |             |                         |             |                         |           |        |        |         |           |        |        |         |
+|  fbuf[0].u_buf/mem_reg | RAMB18E1  |  B:B:512x32             |  A:A:512x32            |        Read |                     5.9 |       Write |                     5.9 |           |        |        |       1 |           |        |        |       1 |
+| fbuf[1].u_buf/mem      |           | 512x32                  | 512x32                 |             |                         |             |                         |           |        |        |         |           |        |        |         |
+|  fbuf[1].u_buf/mem_reg | RAMB18E1  |  B:B:512x32             |  A:A:512x32            |        Read |                     5.9 |       Write |                     5.9 |           |        |        |       1 |           |        |        |       1 |
+| fbuf[2].u_buf/mem      |           | 512x32                  | 512x32                 |             |                         |             |                         |           |        |        |         |           |        |        |         |
+|  fbuf[2].u_buf/mem_reg | RAMB18E1  |  B:B:512x32             |  A:A:512x32            |        Read |                     5.9 |       Write |                     5.9 |           |        |        |       1 |           |        |        |       1 |
+| p_q                    |           |                         | 77x127                 |             |                         |             |                         |           |        |        |         |           |        |        |         |
+|  p_q_reg_0             | RAMB36E1  |  A:A:128x36 B:B:128x36  |                        |        Read |                     5.9 |        Read |                     5.9 |           |        |        |       0 |           |        |        |       0 |
+|  p_q_reg_1             | RAMB36E1  |  A:A:128x36 B:B:128x19  |                        |        Read |                     5.9 |        Read |                     5.9 |           |        |        |       0 |           |        |        |       0 |
++------------------------+-----------+-------------------------+------------------------+-------------+-------------------------+-------------+-------------------------+-----------+--------+--------+---------+-----------+--------+--------+---------+
+
+
+5. Block Ram / URAM Memory Power - Inferred
+-------------------------------------------
+
++------------------------+-----------+-------------------------+------------------------+----------------------------------------------------+---------------+-------------------+-----------+----------------------------------------------------+---------------+-------------------+-----------+
+| Memory Name            | Primitive | Port 1 Dimension / Map  | Port 2 Dimension / Map | Port A Power Gated                                 | Port A Enable | Port A WRITE_MODE | A Cascade | Port B Power Gated                                 | Port B Enable | Port B WRITE_MODE | B Cascade |
++------------------------+-----------+-------------------------+------------------------+----------------------------------------------------+---------------+-------------------+-----------+----------------------------------------------------+---------------+-------------------+-----------+
+| w_q                    |           | 2048x128                |                        |                                                    |               |                   |           |                                                    |               |                   |           |
+|  w_q_reg_0             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_1             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_2             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_3             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_4             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_5             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_6             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+|  w_q_reg_7             | RAMB36E1  |                         |  A:A:2048x16           |                                        ENARDEN=NEW |        SIGNAL |       WRITE_FIRST |           |                                                    |               |                   |           |
+| fbuf[0].u_buf/mem      |           | 512x32                  | 512x32                 |                                                    |               |                   |           |                                                    |               |                   |           |
+|  fbuf[0].u_buf/mem_reg | RAMB18E1  |  B:B:512x32             |  A:A:512x32            |             REGCEAREGCE=NEW:ENBWREN=NEW:REGCEB=AUG |         POWER |        READ_FIRST |           |             REGCEAREGCE=NEW:ENBWREN=NEW:REGCEB=AUG |        SIGNAL |        READ_FIRST |           |
+| fbuf[1].u_buf/mem      |           | 512x32                  | 512x32                 |                                                    |               |                   |           |                                                    |               |                   |           |
+|  fbuf[1].u_buf/mem_reg | RAMB18E1  |  B:B:512x32             |  A:A:512x32            |             REGCEAREGCE=NEW:ENBWREN=NEW:REGCEB=AUG |         POWER |        READ_FIRST |           |             REGCEAREGCE=NEW:ENBWREN=NEW:REGCEB=AUG |        SIGNAL |        READ_FIRST |           |
+| fbuf[2].u_buf/mem      |           | 512x32                  | 512x32                 |                                                    |               |                   |           |                                                    |               |                   |           |
+|  fbuf[2].u_buf/mem_reg | RAMB18E1  |  B:B:512x32             |  A:A:512x32            | REGCEAREGCE=NEW:ENARDEN=NEW:ENBWREN=NEW:REGCEB=AUG |        SIGNAL |        READ_FIRST |           | REGCEAREGCE=NEW:ENARDEN=NEW:ENBWREN=NEW:REGCEB=AUG |        SIGNAL |        READ_FIRST |           |
+| p_q                    |           | 77x127                  |                        |                                                    |               |                   |           |                                                    |               |                   |           |
+|  p_q_reg_0             | RAMB36E1  |  A:A:128x36 B:B:128x36  |                        |                                                    |         POWER |       WRITE_FIRST |           |                                                    |         POWER |       WRITE_FIRST |           |
+|  p_q_reg_1             | RAMB36E1  |  A:A:128x36 B:B:128x19  |                        |                                                    |         POWER |       WRITE_FIRST |           |                                                    |         POWER |       WRITE_FIRST |           |
++------------------------+-----------+-------------------------+------------------------+----------------------------------------------------+---------------+-------------------+-----------+----------------------------------------------------+---------------+-------------------+-----------+
+
+

@@ -1,0 +1,35 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sun Oct 25 12:44:23 2026
+| Host         : SaY-PC running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file util_hier.rpt
+| Design       : rn_top
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-----------------+-------------+------------+------------+---------+------+-------+--------+--------+------------+
+|     Instance    |    Module   | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++-----------------+-------------+------------+------------+---------+------+-------+--------+--------+------------+
+| rn_top          |       (top) |      24792 |      24764 |       0 |   28 | 14523 |     41 |      1 |         32 |
+|   (rn_top)      |       (top) |       2980 |       2956 |       0 |   24 |  5503 |     35 |      1 |         32 |
+|   fbuf[0].u_buf |      rn_buf |        324 |        324 |       0 |    0 |     0 |      2 |      0 |          0 |
+|   fbuf[1].u_buf |    rn_buf_0 |         70 |         70 |       0 |    0 |     0 |      2 |      0 |          0 |
+|   fbuf[2].u_buf |    rn_buf_1 |         74 |         74 |       0 |    0 |     0 |      2 |      0 |          0 |
+|   u_gap         |      rn_gap |        570 |        566 |       0 |    4 |   508 |      0 |      0 |          0 |
+|   u_pe          | rn_pe_array |      20787 |      20787 |       0 |    0 |  8512 |      0 |      0 |          0 |
++-----------------+-------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

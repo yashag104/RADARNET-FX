@@ -1,0 +1,1271 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Mon Oct 26 15:20:36 2026
+# Process ID         : 14272
+# Current directory  : C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/rn_bd_rn_0_synth_1
+# Command line       : vivado.exe -log rn_bd_rn_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source rn_bd_rn_0.tcl
+# Log file           : C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/rn_bd_rn_0_synth_1/rn_bd_rn_0.vds
+# Journal file       : C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/rn_bd_rn_0_synth_1\vivado.jou
+# Running On         : SaY-PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : 11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz
+# CPU Frequency      : 2496 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 16804 MB
+# Swap memory        : 22245 MB
+# Total Virtual      : 39050 MB
+# Available Virtual  : 16603 MB
+#-----------------------------------------------------------
+source rn_bd_rn_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:27 ; elapsed = 00:00:20 . Memory (MB): peak = 533.156 ; gain = 221.273
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/2025.2/Vivado/data/ip'.
+Command: synth_design -top rn_bd_rn_0 -part xc7z020clg484-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 29272
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1324.402 ; gain = 539.176
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_rn_0' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_rn_0/synth/rn_bd_rn_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'rn_axi' [C:/Users/hp/RADARNET-FX/rtl_v2/zynq/rn_axi.v:14]
+	Parameter W bound to: 8 - type: integer 
+	Parameter NUM_CLASSES bound to: 4 - type: integer 
+	Parameter PE_DSP bound to: true - type: string 
+	Parameter WEIGHTS_FILE bound to: weights.mem - type: string 
+	Parameter PARAMS_FILE bound to: params.mem - type: string 
+INFO: [Synth 8-6157] synthesizing module 'rn_top' [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:22]
+	Parameter W bound to: 8 - type: integer 
+	Parameter NUM_CLASSES bound to: 4 - type: integer 
+	Parameter PE_DSP bound to: true - type: string 
+	Parameter WEIGHTS_FILE bound to: weights.mem - type: string 
+	Parameter PARAMS_FILE bound to: params.mem - type: string 
+INFO: [Synth 8-3876] $readmem data file 'weights.mem' is read successfully [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:105]
+INFO: [Synth 8-3876] $readmem data file 'params.mem' is read successfully [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:106]
+INFO: [Synth 8-6157] synthesizing module 'rn_buf' [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_buf.v:8]
+	Parameter W bound to: 8 - type: integer 
+	Parameter DEPTH bound to: 256 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'rn_buf' (0#1) [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_buf.v:8]
+INFO: [Synth 8-6157] synthesizing module 'rn_pe_array' [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_pe_array.v:16]
+	Parameter W bound to: 8 - type: integer 
+	Parameter use_dsp bound to: true - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'rn_pe_array' (0#1) [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_pe_array.v:16]
+INFO: [Synth 8-6157] synthesizing module 'rn_gap' [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_gap.v:9]
+	Parameter W bound to: 8 - type: integer 
+	Parameter NCH bound to: 64 - type: integer 
+	Parameter T bound to: 32 - type: integer 
+	Parameter AW bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'rn_gap' (0#1) [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_gap.v:9]
+INFO: [Synth 8-226] default block is never used [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:336]
+INFO: [Synth 8-6155] done synthesizing module 'rn_top' (0#1) [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:22]
+INFO: [Synth 8-6155] done synthesizing module 'rn_axi' (0#1) [C:/Users/hp/RADARNET-FX/rtl_v2/zynq/rn_axi.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_rn_0' (0#1) [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_rn_0/synth/rn_bd_rn_0.v:53]
+WARNING: [Synth 8-6014] Unused sequential element avg_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_gap.v:98]
+WARNING: [Synth 8-6014] Unused sequential element q_nig_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:86]
+WARNING: [Synth 8-6014] Unused sequential element q_nog_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:86]
+WARNING: [Synth 8-6014] Unused sequential element q_k_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:87]
+WARNING: [Synth 8-6014] Unused sequential element q_wb_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:90]
+WARNING: [Synth 8-6014] Unused sequential element q_ms_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:90]
+WARNING: [Synth 8-6014] Unused sequential element q_sk_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:90]
+WARNING: [Synth 8-6014] Unused sequential element acc_nxt_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:226]
+WARNING: [Synth 8-6014] Unused sequential element y_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:265]
+WARNING: [Synth 8-7137] Register am_v_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:404]
+WARNING: [Synth 8-7137] Register am_i_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:404]
+WARNING: [Synth 8-7137] Register am_j_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:313]
+WARNING: [Synth 8-7137] Register a2_first_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:421]
+WARNING: [Synth 8-7137] Register a2_last_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:421]
+WARNING: [Synth 8-7137] Register a2_oob_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:421]
+WARNING: [Synth 8-7137] Register a2_dst_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:422]
+WARNING: [Synth 8-7137] Register a2_og_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:422]
+WARNING: [Synth 8-7137] Register a2_src_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:423]
+WARNING: [Synth 8-7137] Register a2_waddr_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:424]
+WARNING: [Synth 8-7137] Register b_first_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:426]
+WARNING: [Synth 8-7137] Register b_last_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:426]
+WARNING: [Synth 8-7137] Register b_oob_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:426]
+WARNING: [Synth 8-7137] Register b_dst_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:427]
+WARNING: [Synth 8-7137] Register b_og_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:427]
+WARNING: [Synth 8-7137] Register b2_first_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:428]
+WARNING: [Synth 8-7137] Register b2_last_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:428]
+WARNING: [Synth 8-7137] Register b2_oob_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:428]
+WARNING: [Synth 8-7137] Register b2_dst_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:429]
+WARNING: [Synth 8-7137] Register b2_og_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:429]
+WARNING: [Synth 8-7137] Register c_first_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:431]
+WARNING: [Synth 8-7137] Register c_last_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:431]
+WARNING: [Synth 8-7137] Register c_dst_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:432]
+WARNING: [Synth 8-7137] Register c_og_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:432]
+WARNING: [Synth 8-7137] Register c_x_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:179]
+WARNING: [Synth 8-7137] Register c_w_reg in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:179]
+WARNING: [Synth 8-7137] Register pe_fst_reg[0] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:173]
+WARNING: [Synth 8-7137] Register pe_fst_reg[1] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:173]
+WARNING: [Synth 8-7137] Register pe_fst_reg[2] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:173]
+WARNING: [Synth 8-7137] Register pe_fst_reg[3] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:173]
+WARNING: [Synth 8-7137] Register pe_lst_reg[0] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:174]
+WARNING: [Synth 8-7137] Register pe_lst_reg[1] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:174]
+WARNING: [Synth 8-7137] Register pe_lst_reg[2] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:174]
+WARNING: [Synth 8-7137] Register pe_lst_reg[3] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:174]
+WARNING: [Synth 8-7137] Register pe_dst_reg[0] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:175]
+WARNING: [Synth 8-7137] Register pe_dst_reg[1] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:175]
+WARNING: [Synth 8-7137] Register pe_dst_reg[2] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:175]
+WARNING: [Synth 8-7137] Register pe_dst_reg[3] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:175]
+WARNING: [Synth 8-7137] Register pe_og_reg[0] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:176]
+WARNING: [Synth 8-7137] Register pe_og_reg[1] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:176]
+WARNING: [Synth 8-7137] Register pe_og_reg[2] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:176]
+WARNING: [Synth 8-7137] Register pe_og_reg[3] in module rn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:176]
+WARNING: [Synth 8-6014] Unused sequential element s_axi_wready_reg was removed.  [C:/Users/hp/RADARNET-FX/rtl_v2/zynq/rn_axi.v:69]
+INFO: [Synth 8-7129] Port s_axi_wstrb[3] in module rn_axi is either unconnected or has no load
+INFO: [Synth 8-7129] Port s_axi_wstrb[2] in module rn_axi is either unconnected or has no load
+INFO: [Synth 8-7129] Port s_axi_wstrb[1] in module rn_axi is either unconnected or has no load
+INFO: [Synth 8-7129] Port s_axi_wstrb[0] in module rn_axi is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 1472.395 ; gain = 687.168
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:27 . Memory (MB): peak = 1472.395 ; gain = 687.168
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:27 . Memory (MB): peak = 1472.395 ; gain = 687.168
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.220 . Memory (MB): peak = 1472.395 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1549.992 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.716 . Memory (MB): peak = 1549.992 ; gain = 0.000
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.992 ; gain = 764.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.992 ; gain = 764.766
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.992 ; gain = 764.766
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'rn_top'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  S_IDLE |                              000 |                              000
+                  S_LOAD |                              001 |                              001
+                  S_INIT |                              010 |                              010
+                 S_ISSUE |                              011 |                              011
+                 S_DRAIN |                              100 |                              100
+                   S_GAP |                              101 |                              101
+                 S_AMAX1 |                              110 |                              110
+                 S_AMAX2 |                              111 |                              111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'rn_top'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:00 ; elapsed = 00:01:08 . Memory (MB): peak = 1549.992 ; gain = 764.766
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   48 Bit       Adders := 8     
+	   2 Input   32 Bit       Adders := 6     
+	   2 Input   24 Bit       Adders := 8     
+	   2 Input   16 Bit       Adders := 3     
+	   2 Input   15 Bit       Adders := 8     
+	   2 Input   10 Bit       Adders := 2     
+	   2 Input    8 Bit       Adders := 11    
+	   2 Input    6 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 3     
+	   2 Input    3 Bit       Adders := 1     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	              512 Bit    Registers := 3     
+	              384 Bit    Registers := 1     
+	              249 Bit    Registers := 1     
+	              128 Bit    Registers := 1     
+	               64 Bit    Registers := 11    
+	               48 Bit    Registers := 16    
+	               32 Bit    Registers := 4     
+	               24 Bit    Registers := 7     
+	               19 Bit    Registers := 24    
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 5     
+	               10 Bit    Registers := 1     
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 60    
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 3     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 8     
+	                1 Bit    Registers := 69    
++---RAMs : 
+	              16K Bit	(256 X 64 bit)          RAMs := 3     
++---ROMs : 
+	                    ROMs := 2     
++---Muxes : 
+	   2 Input  128 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 3     
+	   3 Input   64 Bit        Muxes := 2     
+	   2 Input   32 Bit        Muxes := 2     
+	   4 Input   32 Bit        Muxes := 1     
+	   8 Input   32 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 8     
+	   3 Input   22 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 2     
+	   8 Input   16 Bit        Muxes := 2     
+	   2 Input   15 Bit        Muxes := 1     
+	   8 Input   15 Bit        Muxes := 1     
+	   2 Input   10 Bit        Muxes := 2     
+	   8 Input   10 Bit        Muxes := 2     
+	   2 Input    9 Bit        Muxes := 1     
+	   8 Input    9 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 15    
+	   8 Input    8 Bit        Muxes := 10    
+	   2 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   8 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 3     
+	   8 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 2     
+	   8 Input    4 Bit        Muxes := 3     
+	   2 Input    3 Bit        Muxes := 5     
+	   8 Input    3 Bit        Muxes := 3     
+	   2 Input    2 Bit        Muxes := 5     
+	   8 Input    2 Bit        Muxes := 6     
+	   2 Input    1 Bit        Muxes := 17    
+	   8 Input    1 Bit        Muxes := 24    
+	   3 Input    1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'r0_p_reg' and it is trimmed from '384' to '24' bits. [C:/Users/hp/RADARNET-FX/rtl_v2/src/rn_top.v:233]
+DSP Report: Generating DSP u_pe/pe[0].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[0].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[0].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[0].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[0].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[0].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[0].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[0].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[0].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[0].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[0].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[0].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[0].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[0].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[0].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[0].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[0].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[0].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[0].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[0].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[0].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[0].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[0].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[0].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[0].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[0].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[0].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[0].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[0].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[1].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[1].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[1].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[1].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[1].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[1].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[1].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[1].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[1].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[1].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[1].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[1].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[1].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[1].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[1].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[1].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[1].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[1].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[1].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[1].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[1].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[1].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[1].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[1].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[1].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[1].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[1].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[1].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[2].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[2].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[2].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[2].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[2].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[2].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[2].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[2].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[2].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[2].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[2].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[2].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[2].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[2].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[2].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[2].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[2].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[2].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[2].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[2].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[2].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[2].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[2].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[2].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[2].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[2].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[2].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[2].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[3].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[3].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[3].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[3].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[3].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[3].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[3].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[3].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[3].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[3].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[3].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[3].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[3].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[3].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[3].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[3].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[3].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[3].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[3].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[3].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[3].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[3].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[3].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[3].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[3].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[3].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[3].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[3].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP r2_sk_reg[0], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[0] is absorbed into DSP r2_sk_reg[0].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[0].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[0].
+DSP Report: operator p_38_out is absorbed into DSP r2_sk_reg[0].
+DSP Report: Generating DSP r2_m_reg[0], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r0_p_reg is absorbed into DSP r2_m_reg[0].
+DSP Report: register r2_m_reg[0] is absorbed into DSP r2_m_reg[0].
+DSP Report: register r2_m_reg[0] is absorbed into DSP r2_m_reg[0].
+DSP Report: register acc_reg[0] is absorbed into DSP r2_m_reg[0].
+DSP Report: register r0_acc_reg[0] is absorbed into DSP r2_m_reg[0].
+DSP Report: register r2_m_reg[0] is absorbed into DSP r2_m_reg[0].
+DSP Report: register r1_t_reg[0] is absorbed into DSP r2_m_reg[0].
+DSP Report: operator p_39_out is absorbed into DSP r2_m_reg[0].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[0].
+DSP Report: Generating DSP r2_sk_reg[1], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[1] is absorbed into DSP r2_sk_reg[1].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[1].
+DSP Report: register r2_sk_reg[1] is absorbed into DSP r2_sk_reg[1].
+DSP Report: operator p_36_out is absorbed into DSP r2_sk_reg[1].
+DSP Report: Generating DSP r2_m_reg[1], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: register r2_m_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: register r2_m_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: register acc_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: register r0_acc_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: register r2_m_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: register r1_t_reg[1] is absorbed into DSP r2_m_reg[1].
+DSP Report: operator p_37_out is absorbed into DSP r2_m_reg[1].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[1].
+DSP Report: Generating DSP r2_sk_reg[2], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[2] is absorbed into DSP r2_sk_reg[2].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[2].
+DSP Report: register r2_sk_reg[2] is absorbed into DSP r2_sk_reg[2].
+DSP Report: operator p_34_out is absorbed into DSP r2_sk_reg[2].
+DSP Report: Generating DSP r2_m_reg[2], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: register r2_m_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: register r2_m_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: register acc_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: register r0_acc_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: register r2_m_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: register r1_t_reg[2] is absorbed into DSP r2_m_reg[2].
+DSP Report: operator p_35_out is absorbed into DSP r2_m_reg[2].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[2].
+DSP Report: Generating DSP r2_sk_reg[3], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[3] is absorbed into DSP r2_sk_reg[3].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[3].
+DSP Report: register r2_sk_reg[3] is absorbed into DSP r2_sk_reg[3].
+DSP Report: operator p_32_out is absorbed into DSP r2_sk_reg[3].
+DSP Report: Generating DSP r2_m_reg[3], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: register r2_m_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: register r2_m_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: register acc_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: register r0_acc_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: register r2_m_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: register r1_t_reg[3] is absorbed into DSP r2_m_reg[3].
+DSP Report: operator p_33_out is absorbed into DSP r2_m_reg[3].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[3].
+DSP Report: Generating DSP r2_sk_reg[4], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[4] is absorbed into DSP r2_sk_reg[4].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[4].
+DSP Report: register r2_sk_reg[4] is absorbed into DSP r2_sk_reg[4].
+DSP Report: operator p_30_out is absorbed into DSP r2_sk_reg[4].
+DSP Report: Generating DSP u_pe/pe[4].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[4].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[4].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[4].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[4].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[4].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[4].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[4].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[4].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[4].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[4].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[4].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[4].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[4].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[4].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[4].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[4].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[4].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[4].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[4].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[4].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[4].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[4].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[4].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[4].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[4].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[4].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[4].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[4].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP r2_m_reg[4], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: register r2_m_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: register r2_m_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: register acc_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: register r0_acc_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: register r2_m_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: register r1_t_reg[4] is absorbed into DSP r2_m_reg[4].
+DSP Report: operator p_31_out is absorbed into DSP r2_m_reg[4].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[4].
+DSP Report: Generating DSP r2_sk_reg[5], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[5] is absorbed into DSP r2_sk_reg[5].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[5].
+DSP Report: register r2_sk_reg[5] is absorbed into DSP r2_sk_reg[5].
+DSP Report: operator p_28_out is absorbed into DSP r2_sk_reg[5].
+DSP Report: Generating DSP u_pe/pe[5].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[5].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[5].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[5].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[5].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[5].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[5].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[5].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[5].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[5].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[5].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[5].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[5].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[5].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[5].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[5].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[5].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[5].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[5].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[5].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[5].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[5].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[5].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[5].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[5].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[5].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[5].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[5].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[5].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP r2_m_reg[5], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: register r2_m_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: register r2_m_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: register acc_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: register r0_acc_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: register r2_m_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: register r1_t_reg[5] is absorbed into DSP r2_m_reg[5].
+DSP Report: operator p_29_out is absorbed into DSP r2_m_reg[5].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[5].
+DSP Report: Generating DSP r2_sk_reg[6], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[6] is absorbed into DSP r2_sk_reg[6].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[6].
+DSP Report: register r2_sk_reg[6] is absorbed into DSP r2_sk_reg[6].
+DSP Report: operator p_26_out is absorbed into DSP r2_sk_reg[6].
+DSP Report: Generating DSP u_pe/pe[6].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[6].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[6].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[6].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[6].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[6].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[6].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[6].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[6].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[6].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[6].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[6].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[6].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[6].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[6].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[6].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[6].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[6].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[6].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[6].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[6].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[6].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[6].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[6].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[6].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[6].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[6].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[6].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[6].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP r2_m_reg[6], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: register r2_m_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: register r2_m_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: register acc_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: register r0_acc_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: register r2_m_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: register r1_t_reg[6] is absorbed into DSP r2_m_reg[6].
+DSP Report: operator p_27_out is absorbed into DSP r2_m_reg[6].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[6].
+DSP Report: Generating DSP r2_sk_reg[7], operation Mode is: (A2*B2)'.
+DSP Report: register r1_skw_reg[7] is absorbed into DSP r2_sk_reg[7].
+DSP Report: register r2_sk_reg[0] is absorbed into DSP r2_sk_reg[7].
+DSP Report: register r2_sk_reg[7] is absorbed into DSP r2_sk_reg[7].
+DSP Report: operator p_24_out is absorbed into DSP r2_sk_reg[7].
+DSP Report: Generating DSP u_pe/pe[7].lvl[0].nd[6].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[7].lvl[0].nd[6].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[0].nd[6].mul.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[6].mul.pv is absorbed into DSP u_pe/pe[7].lvl[0].nd[6].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[1].nd[3].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[7].lvl[1].nd[3].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[3].add.s_reg.
+DSP Report: register u_pe/pe[7].lvl[0].nd[7].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[1].nd[3].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[1].nd[3].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[7].mul.pv is absorbed into DSP u_pe/pe[7].lvl[1].nd[3].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[0].nd[4].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[7].lvl[0].nd[4].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[0].nd[4].mul.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[4].mul.pv is absorbed into DSP u_pe/pe[7].lvl[0].nd[4].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[1].nd[2].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[7].lvl[1].nd[2].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[2].add.s_reg.
+DSP Report: register u_pe/pe[7].lvl[0].nd[5].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[1].nd[2].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[1].nd[2].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[5].mul.pv is absorbed into DSP u_pe/pe[7].lvl[1].nd[2].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[2].nd[1].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[7].lvl[2].nd[1].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[2].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[2].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[2].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[0].nd[2].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[7].lvl[0].nd[2].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[0].nd[2].mul.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[2].mul.pv is absorbed into DSP u_pe/pe[7].lvl[0].nd[2].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[1].nd[1].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[7].lvl[1].nd[1].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[1].add.s_reg.
+DSP Report: register u_pe/pe[7].lvl[0].nd[3].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[1].nd[1].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[1].nd[1].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[3].mul.pv is absorbed into DSP u_pe/pe[7].lvl[1].nd[1].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[0].nd[0].mul.s_reg, operation Mode is: (A*B)'.
+DSP Report: register u_pe/pe[7].lvl[0].nd[0].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[0].nd[0].mul.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[0].mul.pv is absorbed into DSP u_pe/pe[7].lvl[0].nd[0].mul.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[1].nd[0].add.s_reg, operation Mode is: (PCIN+(A*B)')'.
+DSP Report: register u_pe/pe[7].lvl[1].nd[0].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[0].add.s_reg.
+DSP Report: register u_pe/pe[7].lvl[0].nd[1].mul.s_reg is absorbed into DSP u_pe/pe[7].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[1].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[1].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[0].nd[1].mul.pv is absorbed into DSP u_pe/pe[7].lvl[1].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[2].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[7].lvl[2].nd[0].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[2].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[2].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[2].nd[0].add.s_reg.
+DSP Report: Generating DSP u_pe/pe[7].lvl[3].nd[0].add.s_reg, operation Mode is: (PCIN+A:B)'.
+DSP Report: register u_pe/pe[7].lvl[3].nd[0].add.s_reg is absorbed into DSP u_pe/pe[7].lvl[3].nd[0].add.s_reg.
+DSP Report: operator u_pe/pe[7].lvl[3].nd[0].add.s_reg0 is absorbed into DSP u_pe/pe[7].lvl[3].nd[0].add.s_reg.
+DSP Report: Generating DSP r2_m_reg[7], operation Mode is: ((D'+A'')*B'')'.
+DSP Report: register r2_m_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: register r2_m_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: register r2_m_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: register acc_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: register r0_acc_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: register r2_m_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: register r1_t_reg[7] is absorbed into DSP r2_m_reg[7].
+DSP Report: operator p_25_out is absorbed into DSP r2_m_reg[7].
+DSP Report: operator p_0_out is absorbed into DSP r2_m_reg[7].
+INFO: [Synth 8-3917] design rn_bd_rn_0 has port s_axi_bresp[1] driven by constant 0
+INFO: [Synth 8-3917] design rn_bd_rn_0 has port s_axi_bresp[0] driven by constant 0
+INFO: [Synth 8-3917] design rn_bd_rn_0 has port s_axi_rresp[1] driven by constant 0
+INFO: [Synth 8-3917] design rn_bd_rn_0 has port s_axi_rresp[0] driven by constant 0
+INFO: [Synth 8-7129] Port s_axi_wstrb[3] in module rn_bd_rn_0 is either unconnected or has no load
+INFO: [Synth 8-7129] Port s_axi_wstrb[2] in module rn_bd_rn_0 is either unconnected or has no load
+INFO: [Synth 8-7129] Port s_axi_wstrb[1] in module rn_bd_rn_0 is either unconnected or has no load
+INFO: [Synth 8-7129] Port s_axi_wstrb[0] in module rn_bd_rn_0 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:49 ; elapsed = 00:01:59 . Memory (MB): peak = 1601.152 ; gain = 815.926
+---------------------------------------------------------------------------------
+ Sort Area is  u_pe/pe[0].lvl[0].nd[6].mul.s_reg_6 : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[6].mul.s_reg_6 : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[6].mul.s_reg_a : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[6].mul.s_reg_a : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[6].mul.s_reg_e : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[6].mul.s_reg_e : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[6].mul.s_reg_12 : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[6].mul.s_reg_12 : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[6].mul.s_reg_21 : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[6].mul.s_reg_21 : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[6].mul.s_reg_27 : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[6].mul.s_reg_27 : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[6].mul.s_reg_2d : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[6].mul.s_reg_2d : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[6].mul.s_reg_33 : 0 0 : 470 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[6].mul.s_reg_33 : 0 1 : 547 1167 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[2].mul.s_reg_3 : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[2].mul.s_reg_3 : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[2].mul.s_reg_8 : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[2].mul.s_reg_8 : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[2].mul.s_reg_c : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[2].mul.s_reg_c : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[2].mul.s_reg_10 : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[2].mul.s_reg_10 : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[2].mul.s_reg_1f : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[2].mul.s_reg_1f : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[2].mul.s_reg_25 : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[2].mul.s_reg_25 : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[2].mul.s_reg_2b : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[2].mul.s_reg_2b : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[2].mul.s_reg_31 : 0 0 : 470 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[2].mul.s_reg_31 : 0 1 : 547 1092 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[0].mul.s_reg_0 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[0].mul.s_reg_0 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[4].mul.s_reg_5 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[0].lvl[0].nd[4].mul.s_reg_5 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[0].mul.s_reg_7 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[0].mul.s_reg_7 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[4].mul.s_reg_9 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[1].lvl[0].nd[4].mul.s_reg_9 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[0].mul.s_reg_b : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[0].mul.s_reg_b : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[4].mul.s_reg_d : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[2].lvl[0].nd[4].mul.s_reg_d : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[0].mul.s_reg_f : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[0].mul.s_reg_f : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[4].mul.s_reg_11 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[3].lvl[0].nd[4].mul.s_reg_11 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[0].mul.s_reg_1e : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[0].mul.s_reg_1e : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[4].mul.s_reg_20 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[4].lvl[0].nd[4].mul.s_reg_20 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[0].mul.s_reg_24 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[0].mul.s_reg_24 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[4].mul.s_reg_26 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[5].lvl[0].nd[4].mul.s_reg_26 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[0].mul.s_reg_2a : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[0].mul.s_reg_2a : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[4].mul.s_reg_2c : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[6].lvl[0].nd[4].mul.s_reg_2c : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[0].mul.s_reg_30 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[0].mul.s_reg_30 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[4].mul.s_reg_32 : 0 0 : 470 1017 : Used 1 time 100
+ Sort Area is  u_pe/pe[7].lvl[0].nd[4].mul.s_reg_32 : 0 1 : 547 1017 : Used 1 time 100
+ Sort Area is  r2_m_reg[1]_17 : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[2]_1a : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[3]_1c : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[4]_22 : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[5]_28 : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[6]_2e : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[7]_34 : 0 0 : 3316 3316 : Used 1 time 0
+ Sort Area is  r2_m_reg[0]_13 : 0 0 : 3315 3315 : Used 1 time 0
+ Sort Area is  r2_sk_reg[0]_15 : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[1]_19 : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[2]_1b : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[3]_1d : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[4]_23 : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[5]_29 : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[6]_2f : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  r2_sk_reg[7]_35 : 0 0 : 1288 1288 : Used 1 time 0
+ Sort Area is  u_pe/pe[0].lvl[0].nd[6].mul.s_reg_6 : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[0].lvl[0].nd[6].mul.s_reg_6 : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[1].lvl[0].nd[6].mul.s_reg_a : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[1].lvl[0].nd[6].mul.s_reg_a : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[2].lvl[0].nd[6].mul.s_reg_e : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[2].lvl[0].nd[6].mul.s_reg_e : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[3].lvl[0].nd[6].mul.s_reg_12 : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[3].lvl[0].nd[6].mul.s_reg_12 : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[4].lvl[0].nd[6].mul.s_reg_21 : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[4].lvl[0].nd[6].mul.s_reg_21 : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[5].lvl[0].nd[6].mul.s_reg_27 : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[5].lvl[0].nd[6].mul.s_reg_27 : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[6].lvl[0].nd[6].mul.s_reg_2d : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[6].lvl[0].nd[6].mul.s_reg_2d : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[7].lvl[0].nd[6].mul.s_reg_33 : 0 2 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[7].lvl[0].nd[6].mul.s_reg_33 : 0 3 : 75 1167 : Used 1 time 0
+ Sort Area is  u_pe/pe[0].lvl[0].nd[2].mul.s_reg_3 : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[1].lvl[0].nd[2].mul.s_reg_8 : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[2].lvl[0].nd[2].mul.s_reg_c : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[3].lvl[0].nd[2].mul.s_reg_10 : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[4].lvl[0].nd[2].mul.s_reg_1f : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[5].lvl[0].nd[2].mul.s_reg_25 : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[6].lvl[0].nd[2].mul.s_reg_2b : 0 2 : 75 1092 : Used 1 time 0
+ Sort Area is  u_pe/pe[7].lvl[0].nd[2].mul.s_reg_31 : 0 2 : 75 1092 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++------------+------------+---------------+----------------+
+|Module Name | RTL Object | Depth x Width | Implemented As | 
++------------+------------+---------------+----------------+
+|rn_top      | p_q_reg    | 64x249        | Block RAM      | 
++------------+------------+---------------+----------------+
+
+
+Block RAM: Preliminary Mapping Report (see note below)
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object            | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|\inst/u_rn  | fbuf[0].u_buf/mem_reg | 256 x 64(READ_FIRST)   | W |   | 256 x 64(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
+|\inst/u_rn  | fbuf[1].u_buf/mem_reg | 256 x 64(READ_FIRST)   | W |   | 256 x 64(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
+|\inst/u_rn  | fbuf[2].u_buf/mem_reg | 256 x 64(READ_FIRST)   | W |   | 256 x 64(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping     | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 15     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
+|rn_top      | (A2*B2)'        | 25     | 8      | -      | -      | 33     | 1    | 1    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A*B)'          | 8      | 8      | -      | -      | 16     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|rn_pe_array | (PCIN+(A*B)')'  | 8      | 8      | -      | -      | 19     | 0    | 0    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'     | 1      | 18     | -      | -      | -1     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A'')*B'')' | 24     | 17     | -      | 24     | 42     | 2    | 2    | -    | 1    | 1     | 1    | 0    | 
++------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:51 ; elapsed = 00:02:02 . Memory (MB): peak = 1601.152 ; gain = 815.926
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object            | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|\inst/u_rn  | fbuf[0].u_buf/mem_reg | 256 x 64(READ_FIRST)   | W |   | 256 x 64(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
+|\inst/u_rn  | fbuf[1].u_buf/mem_reg | 256 x 64(READ_FIRST)   | W |   | 256 x 64(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
+|\inst/u_rn  | fbuf[2].u_buf/mem_reg | 256 x 64(READ_FIRST)   | W |   | 256 x 64(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++------------+-----------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/w_q_reg_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance inst/u_rn/p_q_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:57 ; elapsed = 00:02:08 . Memory (MB): peak = 1601.152 ; gain = 815.926
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:02:05 ; elapsed = 00:02:17 . Memory (MB): peak = 1766.727 ; gain = 981.500
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:05 ; elapsed = 00:02:17 . Memory (MB): peak = 1766.727 ; gain = 981.500
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:06 ; elapsed = 00:02:18 . Memory (MB): peak = 1766.727 ; gain = 981.500
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:06 ; elapsed = 00:02:18 . Memory (MB): peak = 1766.727 ; gain = 981.500
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:06 ; elapsed = 00:02:18 . Memory (MB): peak = 1769.719 ; gain = 984.492
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:06 ; elapsed = 00:02:18 . Memory (MB): peak = 1769.719 ; gain = 984.492
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------+-----------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name                    | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+-----------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|rn_bd_rn_0  | inst/u_rn/u_gap/w_cg_reg[2] | 4      | 3     | NO           | NO                 | YES               | 3      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/u_gap/q_last_reg  | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/u_gap/q_first_reg | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/pe_lst_reg[3]     | 8      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/pe_og_reg[3][7]   | 8      | 2     | NO           | NO                 | NO                | 2      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/pe_og_reg[3][5]   | 8      | 6     | NO           | NO                 | YES               | 6      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/b2_oob_reg        | 3      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/pe_fst_reg[3]     | 8      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/pe_dst_reg[3][7]  | 8      | 8     | NO           | NO                 | YES               | 8      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/eng_we_reg        | 6      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/eng_waddr_reg[7]  | 7      | 8     | NO           | NO                 | YES               | 8      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/u_gap/q_v_reg     | 4      | 1     | YES          | NO                 | YES               | 1      | 0       | 
+|rn_bd_rn_0  | inst/u_rn/pe_v_reg[3]       | 9      | 1     | YES          | NO                 | YES               | 1      | 0       | 
++------------+-----------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+-------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping       | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_top      | (A'*B')'          | 22     | 18     | -      | -      | 33     | 1    | 1    | -    | -    | -     | 0    | 1    | 
+|rn_top      | ((D'+A')'*B'')'   | 30     | 16     | -      | 25     | 42     | 1    | 2    | -    | 1    | 1     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 0      | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (A'*B'')'         | 30     | 18     | -      | -      | 16     | 1    | 2    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+(A'*B'')')' | 30     | 18     | -      | -      | 19     | 1    | 2    | -    | -    | -     | 1    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|rn_pe_array | (PCIN+A:B)'       | 30     | 18     | -      | -      | 19     | 0    | 0    | -    | -    | -     | 0    | 1    | 
++------------+-------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY4   |   420|
+|2     |DSP48E1  |   104|
+|3     |LUT1     |    57|
+|4     |LUT2     |   717|
+|5     |LUT3     |  1254|
+|6     |LUT4     |   880|
+|7     |LUT5     |   296|
+|8     |LUT6     |   598|
+|9     |RAMB18E1 |     2|
+|10    |RAMB36E1 |    13|
+|11    |SRL16E   |    35|
+|12    |FDCE     |   269|
+|13    |FDRE     |  1606|
+|14    |FDSE     |   112|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:06 ; elapsed = 00:02:18 . Memory (MB): peak = 1769.719 ; gain = 984.492
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:33 ; elapsed = 00:02:06 . Memory (MB): peak = 1769.719 ; gain = 906.895
+Synthesis Optimization Complete : Time (s): cpu = 00:02:06 ; elapsed = 00:02:18 . Memory (MB): peak = 1769.719 ; gain = 984.492
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.146 . Memory (MB): peak = 1781.754 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 539 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1877.594 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: bae5413e
+INFO: [Common 17-83] Releasing license: Synthesis
+70 Infos, 53 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:19 ; elapsed = 00:02:34 . Memory (MB): peak = 1877.594 ; gain = 1318.250
+INFO: [Coretcl 2-1174] Renamed 7 cell refs.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1877.594 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/rn_bd_rn_0_synth_1/rn_bd_rn_0.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file rn_bd_rn_0_utilization_synth.rpt -pb rn_bd_rn_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Oct 26 15:23:47 2026...

@@ -40,7 +40,8 @@ rtl_v2/vivado/run_impl.sh 8 5      # W, clock period in ns → rtl_v2/build/impl
 
 ## Results
 
-**Timing method.**
+**Timing method.** Raw Vivado reports for every number here are in `../results/vivado_reports/`.
+
 * *Out-of-context (OOC):* xc7z020clg484-1, Vivado 2025.2, place & route with the clock
   on a global buffer (`HD.CLK_SRC`). Each width is re-implemented **at the frequency
   reported** and counts only if the internal register-to-register paths meet setup **and**
@@ -58,7 +59,7 @@ Cycles are measured by the DUT counter from `start` to `result_valid`, including
 | original `rtl/` | 0.5 | 2,376,786 | (72.2 MHz est.) | 32.9 ms | – | 10,012 | 5,461 | 15 | 0 |
 | v2, W=4  | 16  | 76,123 | 169.5 MHz | 449 µs | 533 µs | 1,552 | 1,274 | 11.5 | 28 |
 | **v2, W=8**  | 64  | 20,315 | **175.4 MHz** | **116 µs** | **142 µs** | 2,671 | 2,709 | 14 | 104 |
-| v2, W=16 | 256 | 5,855  | (rerun pending) | – | 41 µs | 25,121 | 14,864 | 41.5 | 32 |
+| v2, W=16 | 256 | 5,855  | 138.9 MHz | 42 µs | 41 µs | 25,121 | 14,864 | 41.5 | 32 |
 
 The ROMs hold the calibration from the training split (`checkpoints/radarnet_intq.npz`). On the
 paper's 30,000-sample test set, that integer model scores **83.18%**, against **83.26%** in FP32

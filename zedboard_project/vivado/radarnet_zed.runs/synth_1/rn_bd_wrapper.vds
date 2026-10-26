@@ -1,0 +1,263 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Mon Oct 26 15:26:50 2026
+# Process ID         : 31852
+# Current directory  : C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1
+# Command line       : vivado.exe -log rn_bd_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source rn_bd_wrapper.tcl
+# Log file           : C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/rn_bd_wrapper.vds
+# Journal file       : C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1\vivado.jou
+# Running On         : SaY-PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : 11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz
+# CPU Frequency      : 2496 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 16804 MB
+# Swap memory        : 22245 MB
+# Total Virtual      : 39050 MB
+# Available Virtual  : 16709 MB
+#-----------------------------------------------------------
+source rn_bd_wrapper.tcl -notrace
+create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 530.637 ; gain = 218.625
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/2025.2/Vivado/data/ip'.
+Command: synth_design -top rn_bd_wrapper -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 26352
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1332.840 ; gain = 542.055
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_wrapper' [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/hdl/rn_bd_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'rn_bd' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:13]
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_ps_0' [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_ps_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_ps_0' (0#1) [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_ps_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'TTC0_WAVE0_OUT' of module 'rn_bd_ps_0' is unconnected for instance 'ps' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:138]
+WARNING: [Synth 8-7071] port 'TTC0_WAVE1_OUT' of module 'rn_bd_ps_0' is unconnected for instance 'ps' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:138]
+WARNING: [Synth 8-7071] port 'TTC0_WAVE2_OUT' of module 'rn_bd_ps_0' is unconnected for instance 'ps' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:138]
+WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'rn_bd_ps_0' is unconnected for instance 'ps' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:138]
+WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'rn_bd_ps_0' is unconnected for instance 'ps' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:138]
+WARNING: [Synth 8-7023] instance 'ps' of module 'rn_bd_ps_0' has 68 connections declared, but only 63 given [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:138]
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_ps_axi_periph_0' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:293]
+INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_1R7VT9D' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:539]
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_ps_axi_periph_imp_auto_pc_0' [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_ps_axi_periph_imp_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_ps_axi_periph_imp_auto_pc_0' (0#1) [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_ps_axi_periph_imp_auto_pc_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'm_axi_awprot' of module 'rn_bd_ps_axi_periph_imp_auto_pc_0' is unconnected for instance 'auto_pc' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:717]
+WARNING: [Synth 8-7071] port 'm_axi_arprot' of module 'rn_bd_ps_axi_periph_imp_auto_pc_0' is unconnected for instance 'auto_pc' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:717]
+WARNING: [Synth 8-7023] instance 'auto_pc' of module 'rn_bd_ps_axi_periph_imp_auto_pc_0' has 59 connections declared, but only 57 given [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:717]
+INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_1R7VT9D' (0#1) [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:539]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_ps_axi_periph_0' (0#1) [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:293]
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_rn_0' [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_rn_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_rn_0' (0#1) [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_rn_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'rn_bd_rst_ps_142M_0' [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_rst_ps_142M_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_rst_ps_142M_0' (0#1) [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/.Xil/Vivado-31852-SaY-PC/realtime/rn_bd_rst_ps_142M_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'rn_bd_rst_ps_142M_0' is unconnected for instance 'rst_ps_142M' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:284]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'rn_bd_rst_ps_142M_0' is unconnected for instance 'rst_ps_142M' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:284]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'rn_bd_rst_ps_142M_0' is unconnected for instance 'rst_ps_142M' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:284]
+WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'rn_bd_rst_ps_142M_0' is unconnected for instance 'rst_ps_142M' [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:284]
+WARNING: [Synth 8-7023] instance 'rst_ps_142M' of module 'rn_bd_rst_ps_142M_0' has 10 connections declared, but only 6 given [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:284]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd' (0#1) [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/synth/rn_bd.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'rn_bd_wrapper' (0#1) [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/hdl/rn_bd_wrapper.v:13]
+WARNING: [Synth 8-7129] Port M_ACLK in module s00_couplers_imp_1R7VT9D is either unconnected or has no load
+WARNING: [Synth 8-7129] Port M_ARESETN in module s00_couplers_imp_1R7VT9D is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ACLK in module rn_bd_ps_axi_periph_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARESETN in module rn_bd_ps_axi_periph_0 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1455.027 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_rn_0/rn_bd_rn_0/rn_bd_rn_0_in_context.xdc] for cell 'rn_bd_i/rn'
+Finished Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_rn_0/rn_bd_rn_0/rn_bd_rn_0_in_context.xdc] for cell 'rn_bd_i/rn'
+Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_ps_0/rn_bd_ps_0/rn_bd_ps_0_in_context.xdc] for cell 'rn_bd_i/ps'
+Finished Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_ps_0/rn_bd_ps_0/rn_bd_ps_0_in_context.xdc] for cell 'rn_bd_i/ps'
+Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_ps_axi_periph_imp_auto_pc_0/rn_bd_ps_axi_periph_imp_auto_pc_0/rn_bd_ps_axi_periph_imp_auto_pc_0_in_context.xdc] for cell 'rn_bd_i/ps_axi_periph/s00_couplers/auto_pc'
+Finished Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_ps_axi_periph_imp_auto_pc_0/rn_bd_ps_axi_periph_imp_auto_pc_0/rn_bd_ps_axi_periph_imp_auto_pc_0_in_context.xdc] for cell 'rn_bd_i/ps_axi_periph/s00_couplers/auto_pc'
+Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_rst_ps_142M_0/rn_bd_rst_ps_142M_0/rn_bd_rst_ps_142M_0_in_context.xdc] for cell 'rn_bd_i/rst_ps_142M'
+Finished Parsing XDC File [c:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.gen/sources_1/bd/rn_bd/ip/rn_bd_rst_ps_142M_0/rn_bd_rst_ps_142M_0/rn_bd_rst_ps_142M_0_in_context.xdc] for cell 'rn_bd_i/rst_ps_142M'
+Parsing XDC File [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1455.027 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1455.027 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1455.027 ; gain = 664.242
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7129] Port ACLK in module rn_bd_ps_axi_periph_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ARESETN in module rn_bd_ps_axi_periph_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port M00_ACLK in module rn_bd_ps_axi_periph_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port M00_ARESETN in module rn_bd_ps_axi_periph_0 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1468.879 ; gain = 678.094
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1642.512 ; gain = 851.727
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1643.145 ; gain = 852.359
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1652.930 ; gain = 862.145
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:44 ; elapsed = 00:00:46 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:44 ; elapsed = 00:00:46 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:44 ; elapsed = 00:00:46 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:44 ; elapsed = 00:00:46 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:44 ; elapsed = 00:00:46 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:44 ; elapsed = 00:00:47 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+----------------------------------+----------+
+|      |BlackBox name                     |Instances |
++------+----------------------------------+----------+
+|1     |rn_bd_ps_0                        |         1|
+|2     |rn_bd_ps_axi_periph_imp_auto_pc_0 |         1|
+|3     |rn_bd_rn_0                        |         1|
+|4     |rn_bd_rst_ps_142M_0               |         1|
++------+----------------------------------+----------+
+
+Report Cell Usage: 
++------+--------------------------------+------+
+|      |Cell                            |Count |
++------+--------------------------------+------+
+|1     |rn_bd_ps                        |     1|
+|2     |rn_bd_ps_axi_periph_imp_auto_pc |     1|
+|3     |rn_bd_rn                        |     1|
+|4     |rn_bd_rst_ps_142M               |     1|
++------+--------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:44 ; elapsed = 00:00:47 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:34 ; elapsed = 00:00:44 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+Synthesis Optimization Complete : Time (s): cpu = 00:00:45 ; elapsed = 00:00:47 . Memory (MB): peak = 1901.832 ; gain = 1111.047
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 1901.832 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1910.973 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: cbd3e015
+INFO: [Common 17-83] Releasing license: Synthesis
+31 Infos, 22 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:51 ; elapsed = 00:00:56 . Memory (MB): peak = 1914.949 ; gain = 1360.844
+INFO: [Common 17-1381] The checkpoint 'C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/synth_1/rn_bd_wrapper.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file rn_bd_wrapper_utilization_synth.rpt -pb rn_bd_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Oct 26 15:27:58 2026...
