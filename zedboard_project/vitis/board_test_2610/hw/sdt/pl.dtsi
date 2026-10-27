@@ -1,0 +1,32 @@
+/ {
+	amba_pl: amba_pl {
+		ranges;
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		firmware-name = "rn_bd_wrapper.bit.bin";
+		clocking0: clocking0 {
+			compatible = "xlnx,fclk";
+			assigned-clocks = <&clkc 15>;
+			assigned-clock-rates = <142000000>;
+			#clock-cells = <0>;
+			clock-output-names = "fabric_clk";
+			clocks = <&clkc 15>;
+		};
+		rn: rn_axi@43c00000 {
+			compatible = "xlnx,rn-axi-1.0";
+			xlnx,num-classes = <4>;
+			xlnx,ip-name = "rn_axi";
+			reg = <0x43c00000 0x1000>;
+			xlnx,weights-file = "weights.mem";
+			clocks = <&clkc 15>;
+			xlnx,edk-iptype = "PERIPHERAL";
+			status = "okay";
+			xlnx,w = <8>;
+			clock-names = "s_axi_aclk";
+			xlnx,name = "rn";
+			xlnx,params-file = "params.mem";
+			xlnx,pe-dsp;
+		};
+	};
+};

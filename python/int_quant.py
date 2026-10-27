@@ -455,6 +455,10 @@ def cmd_export_c(args):
             f.write("/* the same frames as 16-bit {I,Q} words, as written to the accelerator */\n")
             f.write(arr("rn_vec_iq", "uint16_t", np.array(words)))
             f.write(arr("rn_vec_logits", "int32_t", lg))
+            if args.tb_labels:
+                lab = [int(l, 16) for l in open(args.tb_labels) if l.strip()][:len(xq)]
+                f.write("#define RN_HAVE_LABELS 1\n")
+                f.write(arr("rn_vec_label", "uint8_t", np.array(lab)))
             f.write("#endif\n")
         print(f"{len(xq)} test vectors + golden logits → {vec}")
 
@@ -486,6 +490,7 @@ def main():
     c.add_argument("--intq", required=True)
     c.add_argument("--out", default=os.path.join("..", "sw", "rn_model.h"))
     c.add_argument("--tb-inputs", help="also write rn_vectors.h with these vectors")
+    c.add_argument("--tb-labels", help="true labels of --tb-inputs (printed by rn_bench.c)")
     args = ap.parse_args()
     {"calib": cmd_calib, "eval": cmd_eval, "export": cmd_export,
      "export-c": cmd_export_c}[args.cmd](args)

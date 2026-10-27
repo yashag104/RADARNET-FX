@@ -10,6 +10,9 @@
  *   0x10 CYCLES  R: accelerator cycles, start → result (incl. 128-sample load)
  *   0x14 INFO    R: {16'h524E ("RN"), NUM_CLASSES[7:0], W[7:0]}
  *   0x20 + 4c    R: INT32 logit of class c
+ *
+ * dbg_* ports expose the accelerator's status for an ILA / VIO in the block
+ * design. They are observation-only; leave them unconnected if unused.
  */
 module rn_axi #(
     parameter W            = 8,
@@ -36,7 +39,16 @@ module rn_axi #(
     output reg  [31:0] s_axi_rdata,
     output wire [1:0]  s_axi_rresp,
     output reg         s_axi_rvalid,
-    input  wire        s_axi_rready
+    input  wire        s_axi_rready,
+    // debug / observation (ILA, VIO)
+    output wire        dbg_start,
+    output wire        dbg_iq_valid,
+    output wire        dbg_busy,
+    output wire        dbg_done,
+    output wire        dbg_result_valid,
+    output wire        dbg_anomaly_flag,
+    output wire [7:0]  dbg_class_id,
+    output wire [31:0] dbg_cycle_count
 );
     localparam CW = (NUM_CLASSES > 2) ? $clog2(NUM_CLASSES) : 1;
     wire clk = s_axi_aclk;
@@ -54,6 +66,15 @@ module rn_axi #(
         .iq_data(iq_data), .busy(busy), .done(done), .result_valid(result_valid),
         .class_id(class_id), .anomaly_flag(anomaly_flag), .cycle_count(cycle_count),
         .logits(logits));
+
+    assign dbg_start        = start;
+    assign dbg_iq_valid     = iq_valid;
+    assign dbg_busy         = busy;
+    assign dbg_done         = done;
+    assign dbg_result_valid = result_valid;
+    assign dbg_anomaly_flag = anomaly_flag;
+    assign dbg_class_id     = {{(8-CW){1'b0}}, class_id};
+    assign dbg_cycle_count  = cycle_count;
 
     assign s_axi_bresp = 2'b00;
     assign s_axi_rresp = 2'b00;

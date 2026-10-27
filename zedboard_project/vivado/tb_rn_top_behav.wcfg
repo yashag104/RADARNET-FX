@@ -5,47 +5,19 @@
    <db_ref_list>
       <db_ref path="tb_rn_top_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\tb_rn_top(NUM_VECTORS=10) " />
             <top_module name="glbl" />
+            <top_module name="tb_rn_top" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="492.772091 us"></ZoomEndTime>
-      <Cursor1Time time="2,031.760000 us"></Cursor1Time>
+      <ZoomStartTime time="9,560.295033 us"></ZoomStartTime>
+      <ZoomEndTime time="10,278.212994 us"></ZoomEndTime>
+      <Cursor1Time time="10,158.560000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="340"></NameColumnWidth>
-      <ValueColumnWidth column_width="155"></ValueColumnWidth>
+      <ValueColumnWidth column_width="150"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="7" />
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/busy" type="logic">
-      <obj_property name="ElementShortName">busy</obj_property>
-      <obj_property name="ObjectShortName">busy</obj_property>
-   </wvobject>
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/done" type="logic">
-      <obj_property name="ElementShortName">done</obj_property>
-      <obj_property name="ObjectShortName">done</obj_property>
-   </wvobject>
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/result_valid" type="logic">
-      <obj_property name="ElementShortName">result_valid</obj_property>
-      <obj_property name="ObjectShortName">result_valid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/class_id" type="array">
-      <obj_property name="ElementShortName">class_id[1:0]</obj_property>
-      <obj_property name="ObjectShortName">class_id[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/cycle_count" type="array">
-      <obj_property name="ElementShortName">cycle_count[31:0]</obj_property>
-      <obj_property name="ObjectShortName">cycle_count[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/layer" type="array">
-      <obj_property name="ElementShortName">layer[3:0]</obj_property>
-      <obj_property name="ObjectShortName">layer[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/\tb_rn_top(NUM_VECTORS=10) /dut/state" type="array">
-      <obj_property name="ElementShortName">state[2:0]</obj_property>
-      <obj_property name="ObjectShortName">state[2:0]</obj_property>
-   </wvobject>
+   <WVObjectSize size="0" />
 </wave_config>

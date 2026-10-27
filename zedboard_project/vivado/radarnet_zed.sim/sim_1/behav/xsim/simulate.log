@@ -22,4 +22,5 @@ vec 2:    MATCH cls=3 gold=3 cycles=20315
  latency (cycles) : 20315  (start -> result_valid, incl. 128-cycle load)
 ==================================================
 PASS
-$finish called at time : 10158560 ns : File "C:/Users/hp/RADARNET-FX/rtl_v2/sim/tb_rn_top.v" Line 94
+$finish called at time : 10158560 ns : File "C:/Users/hp/RADARNET-FX/rtl_v2/sim/tb_rn_top.v" Line 107
+INFO: xsimkernel Simulation Memory Usage: 20552 KB (Peak: 20552 KB), Simulation CPU Usage: 58749 ms

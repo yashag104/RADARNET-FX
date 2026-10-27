@@ -1,0 +1,446 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{placeins}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Edge AI-Based FPGA Accelerator for Spectrum Classification and Anomaly Detection}
+
+\author{Author 1, Author 2, and Author 3
+  %  \IEEEauthorblockN{Yash~Agrawal, Srijan~Mukhopadhyay, and Sandeep Joshi}
+  %  \IEEEauthorblockA{Department of Electrical and Electronics Engineering\\ Birla Institute of Technology and Science, Pilani, Rajasthan 333031, India}
+  %  \{f20230306, f20230334, sandeep.joshi\}@pilani.bits-pilani.ac.in
+  }
+\maketitle
+
+
+\begin{abstract}
+Radio Frequency (RF) spectrum monitoring is critical for modern electromagnetic signal environments, where non-cooperative signals, including jamming pulses, spoofing transmissions, and wide-band interference, must be classified and countered within microseconds of first reception. This work presents a fully synthesizable field-programmable gate array (FPGA) accelerator for real-time RF anomaly detection at the sensor edge, eliminating dependence on cloud connectivity or external memory. The system implements an eight-layer one-dimensional Residual Convolutional Neural Network (ResNet-1D).
+The trained model achieves 83.23\% test accuracy in 32-bit floating-point (FP32) precision and 83.18\% after 8-bit integer (INT8) symmetric post-training quantization, representing a degradation of only 0.05\% points. Hardware deployment is enabled through Batch Normalization (BatchNorm) folding and symmetric per-tensor INT8 quantization, compressing all weights to 28.6~KB within the Block Random Access Memory (BRAM) budget of a Xilinx Zynq-7000 System-on-Chip (SoC). The synthesized Register-Transfer Level (RTL) datapath, governed by an eight-state Moore Finite State Machine (FSM) clocked at 142~MHz, achieves an inference latency of 0.78~$\mu$s, which is over four orders of magnitude faster than Graphics Processing Unit (GPU) baselines. The accelerator consumes ultra-low on-chip power of 0.671 W, yielding an energy efficiency of 0.38$\mu$J per inference, which makes the accelerator suitable to be deployed in a battery-powered real-time spectrum monitoring environment.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Edge AI, FPGA accelerator, RF anomaly detection, ResNet-1D, Spectrum monitoring.
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Modern electromagnetic spectrum monitoring systems must be designed to respond to the electromagnetic environment in near real-time. A jammer can suppress communications by barrage or spot-frequency jamming, a navigation spoofer can manipulate receiver state without the receiver's knowledge, and wideband interference from co-channel transmitters can degrade radar performance. The system must detect, classify, and respond to the anomalous waveform within microseconds of its arrival.
+%, long before a cloud round-trip of 10--142~ms could return a classification result.
+% [FIX] "datpaths" → "datapaths", "Cache Miss'" → "cache-miss"
+The Field-Programmable Gate Arrays (FPGAs) present a compelling hardware platform. They synthesize completely pipelined custom datapaths for Convolutional
+Neural Networks (CNNs) without any of the Instruction Fetch, Decode or cache-miss latency as experienced by a Central
+Processing Units (CPUs)/GPU. This allows FPGA-synthesized CNN inference accelerators to enjoy huge spatial parallelism across filter taps, achieve theoretical  Multiply-Accumulate (MAC) throughput, and realize deterministic latency for spectrum-monitoring applications.
+However, the application of deep neural networks in FPGA logic imposes stringent engineering constraints on floating-point operations, which are prohibitively expensive in terms of large look-up tables (LUTs) and digital signal processing (DSP) slice usage. Per-channel running statistics in batch normalization (BN) operations necessitate hardware registers for each channel, and training in the presence of vanishing gradients affects both deep plain CNNs' training consistency and accuracy.
+%The problem of all these three limitations is overcome in an overall hardware-software co-design approach.
+
+In recent years, an end-to-end learning framework for automatic modulation classification based on raw in-phase (I) and quadrature (Q) samples has become the mainstream of automatic modulation classification (AMC) research \cite{b1, b2}. %The last decade surveys have deeply summarized the AMC systems development process from the earliest applications of CNNs to the recent designs of transformer and hybrid networks~\cite{b1}. A review of recent works~\cite{b2} concerning the deeper insertion of DL for physical-layer communication tasks like channel estimation, signal detection, and modulation classification, has motivated hardware-accelerated edge inference.
+The RadioML 2018.01A dataset \cite{b3} subsequently provided 24-class I/Q data at 26 Signal-to-Noise Ratio (SNR) levels and became the community standard benchmark. The authors in \cite{b4} demonstrated the efficiency of an attention-enhanced, transformer-based deep learning architecture. The authors in \cite{b5} have developed a systematic description of robust deep learning for physical layer communications.
+%Hardware acceleration of RF classification has followed two main streams: CPU/GPU-based offline processing, and FPGA-based edge inference. GPU inference of a full RadioML classifier typically requires 5--20~ms per batch on an NVIDIA Jetson-class device, impractical for sub-microsecond EW reaction times.
+Recent literature on FPGA-based AI accelerators \cite{b6} categorizes optimizations at the computational, memory, and system-level, emphasizing hand-designed RTL and extreme quantization as key for performance in resource-limited systems. Also, the authors in \cite{b7} proved that the models built using the attention mechanism obtain much better performance on wireless modulation classification.
+Existing FPGA deep learning RF classifiers, such as the DeepRadio platform \cite{b8}, classify signals received through the RF front end to different modulation types in real time with low power, targeting real-time RF classification applications. The RF System-on-Chip (RFSoC) work in \cite{b9} uses VGG10 and ResNet33 models on the RadioML 2018.01A dataset with FPGA deployment. While prior work in \cite{b10} demonstrated an FPGA-accelerated anomaly detector utilizing an unsupervised autoencoder for generic, out-of-distribution flagging, our work distinctly frames the problem around a supervised ResNet-1D architecture mapping directly to a robust, operational signal taxonomy. In \cite{b11}, the authors achieved approximately 95\% classification accuracy using a ResNet with six residual stacks on the full 24-class RadioML dataset. Tools like hls4ml already implement optimizers that fuse batch normalizations following affine projection layers into a single node with equivalent fused weights \cite{b12}, and ResNet INT8 inference on Xilinx devices is established practice. Recently, \cite{b13} surveyed deep transfer learning approaches for AMC, highlighting emerging architectures that improve generalization across diverse channel conditions. The authors in \cite{b14} demonstrated an FPGA-based real-time signal measurement system using deep learning accelerators.
+%However, this work contributes a genuinely novel element that is absent in prior literature: a defense-threat taxonomy that remaps the 24 RadioML classes into four EW-operational categories (Normal, Jammer, Spoofer, Interference), combined with a fully hand-written Verilog RTL implementation with zero High-Level Synthesis (HLS) tooling dependencies. No prior work performs this exact threat-aligned remapping with a complete custom RTL datapath.
+
+The limitations motivate an end-to-end hardware-accelerated pipeline implemented on an FPGA in this work; the major contributions are summarized as follows.
+\begin{itemize}
+    \item We introduce a novel four-class operational signal taxonomy that maps the 24 RadioML 2018.01A modulation classes onto operational signal categories (Normal, Jammer, Spoofer, Interference), reframing fine-grained modulation recognition as an operationally meaningful signal-classification problem.
+    \item We design an eight-layer ResNet-1D architecture, optimized for FPGA deployment through symmetric post-training INT8 quantization and algebraic BatchNorm folding, compressing the full model to under 30~KB of BRAM. That INT8 post-training quantization preserves 83.18\% test accuracy with only 0.05 percentage-point degradation from the FP32 baseline while compressing all weights to 28.6~KB within on-chip BRAM.
+    \item We implement a fully synthesizable Verilog RTL datapath with zero HLS tooling dependencies, achieving an inference latency of 0.78~$\mu$s at 142MHz, over four orders of magnitude faster than GPU baselines, with a total low on-chip power of only 0.671W and an energy cost of 0.38~$\mu$J per inference, utilizing just 18.82\% of LUTs, 5.13\% of flip-flops, and 10.71\% of BRAM on the Xilinx Zynq-7000 (xc7z020) ZedBoard.
+    %We functionally verify the RTL against 50 Python-generated golden test vectors with per-vector PASS/FAIL reporting and cycle-accurate latency benchmarking, and validate the design on a Xilinx Zynq-7000 ZedBoard using ILA/VIO-based hardware debug, confirming
+\end{itemize}
+%The remainder of this paper is organized as follows. Section~II presents the proposed architecture; Section~III gives the details of the FPGA implementation, Section~IV gives the results, and Section~V concludes the work.
+\section{Proposed Architecture}
+The RadioML 2018.01A dataset \cite{b3}, provides 2,555,904 labeled I/Q signal records across 24 modulation types at 26 SNR levels from $-20$~dB to $+30$~dB in 2~dB steps. Each record is a floating-point array of shape $(1024, 2)$ representing 1,024 complex-valued time samples with I/Q baseband components. The dataset models realistic channel impairments including additive white Gaussian noise (AWGN), multipath Rayleigh fading, carrier frequency offset, timing recovery errors, and hardware non-linearities such as IQ imbalance and phase noise.
+Standard modulation recognition assigns one label per modulation type, yielding a 24-class problem with fine-grained distinctions, e.g., between 16 Quadrature Amplitude Modulation (QAM) and 32 QAM. For real-time spectrum monitoring applications, this granularity is operationally unnecessary and harmful: it increases classifier complexity while the system only needs to know whether a signal is benign or what operational signal category it represents. This work instead introduces a four-class operational signal taxonomy that consolidates the 24 modulations into operationally aligned groups based on spectral characteristics, bandwidth occupancy, and operational signal profiles.
+% TODO(authors): JUSTIFY THE TAXONOMY BEFORE SUBMISSION.
+% This is the paper's headline novelty claim, but Table I currently presents the Normal/Jammer/Spoofer/
+% Interference mapping with no citation and no domain justification beyond the one-line "Rationale"
+% column. A reviewer with EW/SIGINT background is likely to challenge specific assignments -- e.g. OOK
+% is a simple, commonly legitimate modulation, so labeling it "Jammer" needs defending. Recommend either
+% (a) citing EW/SIGINT literature or doctrine that supports grouping by these spectral/bandwidth
+% properties, or (b) explicitly framing the taxonomy as an illustrative/candidate mapping for
+% demonstrating hardware feasibility, with real-world taxonomy validation noted as future work.
+% \begin{table}[htbp]
+% \caption{Defense-Threat Class Mapping from RadioML 2018.01A Modulations}
+% \begin{center}
+% \footnotesize
+% \begin{tabular}{c l p{2.2cm} p{2.5cm}}
+% \toprule
+% \textbf{ID} & \textbf{Category} & \textbf{Rationale} & \textbf{RadioML Modulations} \\
+% \midrule
+% 0 & Normal & Narrowband continuous-wave, legitimate emissions & FM, GMSK, AM-DSB-WC, AM-DSB-SC, AM-SSB-WC, AM-SSB-SC \\
+% \midrule
+% 1 & Jammer & Wideband high-entropy, consistent with barrage jamming & OOK, 64QAM, 128QAM, 256QAM \\
+% \midrule
+% 2 & Spoofer & Coherent phase-modulated, may mimic radar returns & BPSK, QPSK, 8PSK, 16PSK, 32PSK, OQPSK \\
+% \midrule
+% 3 & Interference & Multi-level amplitude-phase, cross-band interference & 16APSK, 32APSK, 64APSK, 128APSK, 16QAM, 32QAM, 8ASK, 4ASK \\
+% \bottomrule
+% \end{tabular}
+% \label{tab:threat_mapping}
+% \end{center}
+% \footnotesize{MPSK: M-ary Phase Shift Keying, MQAM: M-ary Quadrature Amplitutde Modeling, FM: Frequency Modulation, GMSK: Gaussian Minimum Shift Keying, AM-DSB-WC: Amplitude Modulation, Double Sideband, With Carrier,AM-DSB-SC: Amplitude Modulation, Double Sideband, Suppressed Carrier,AM-SSB-WC: Amplitude Modulation, Single Sideband, With Carrier, AM-SSB-SC: Amplitude Modulation, Single Sideband, Suppressed Carrier, OOK: On-Off Keying, BPSK: Binary Phase shift keying, QPSK: Quadrature Phase shift Keying, OQPSK: Offset Quadrature Phase Shift Keying, MASK: M-ary Amplitude Shift Keying, MAPSK: M-ary Amplitude Phase Shift Keying}
+% \end{table}
+
+A plain stacked 1D CNN applies convolutional layers sequentially with no bypass paths. During backpropagation, the gradient of the loss with respect to early-layer parameters is computed as a product of Jacobian matrices across every intermediate layer.
+%When these matrices contain values consistently less than 1, the product shrinks exponentially with depth according to the vanishing gradient problem \cite{b15,b16}. In practice, plain CNNs beyond 8--10 layers learn little in their early stages and often perform worse than shallower counterparts despite having more parameters. Residual Networks \cite{b14} solve this by adding a shortcut connection that adds the block's input directly to its output, bypassing one or two convolutional layers. Gradients flow directly backward through the shortcut without attenuation, reaching early layers intact regardless of network depth. A further hardware advantage of ResNet-1D is that Batch Normalization layers can be algebraically folded into the preceding convolution weights prior to quantization, eliminating every BN-related computation \cite{b16}.
+ResNet-1D maps a two-channel 128-point I/Q input to four anomaly class logits through eight computational stages. The architecture employs progressively increasing channel widths ($2 \rightarrow 16 \rightarrow 32 \rightarrow 64$) combined with stride-2 downsampling at two points to compress the temporal dimension from 128 to 32 timesteps before global average pooling. Table~\ref{tab:layerwise} provides a complete layer-wise breakdown.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption{ResNet-1D Layer-wise Architecture}
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{c l c c c r}
+\toprule
+\textbf{Layer index} & \textbf{Type} & \textbf{In (C$\times$L)} & \textbf{Out (C$\times$L)} & \textbf{k, s} & \textbf{Parameters} \\
+\midrule
+1 & Convolution+BN+ReLU & $2\!\times\!128$ & $16\!\times\!128$ & 7, 1 & 240 \\
+2 & Convolution+BN+ReLU & $16\!\times\!128$ & $32\!\times\!64$ & 3, 2 & 1,568 \\
+3--4 & ResBlk 1 (id) & $32\!\times\!64$ & $32\!\times\!64$ & 3, 1 & 9,280 \\
+5--7 & ResBlk 2 (proj) & $32\!\times\!64$ & $64\!\times\!32$ & 3, 2 & 17,664 \\
+8 & GAP & $64\!\times\!32$ & $64\!\times\!1$ & --- & 0 \\
+9 & FC + Argmax & 64 & 4 & --- & 260 \\
+\midrule
+ & \multicolumn{4}{r}{\textbf{Total Trainable Parameters}} & \textbf{29,252} \\
+\bottomrule
+\end{tabular}
+\label{tab:layerwise}
+\end{center}
+% [FIX] "k: kernel index" → "k: kernel size" (table column shows k=7, k=3 which are sizes, not indices)
+\footnotesize{ResBlk: Residual Block;
+id: identity shortcut; proj: projection shortcut; GAP: Global Average Pooling;
+FC: Fully Connected layer; ReLU: Rectified Linear Unit; C: channels; L: temporal length; s: stride; k: kernel size.}
+%\vspace{-0.3cm}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [FIX] "indice" → "index" (two occurrences below)
+%The datapath is governed by the following equations, derived directly from the layer definitions in Table~\ref{tab:layerwise} and implemented one-to-one in the RTL described in Section~\ref{sec:hw}.
+The 1D convolution output for output channel index $c_o$ at time position $t$ is expressed as
+\begin{equation}
+y[c_o, t] = \sum_{c_i=0}^{C_{in}-1} \sum_{k=0}^{K-1} W[c_o, c_i, k] \ast x[c_i, t \cdot s + k] + b[c_o],
+\label{eq:conv1d}
+\end{equation}
+where $\ast$ denotes the linear convolution operation, $c_i$ is the input channel index, $K$ is the total kernel size, $x$ is the input tensor, $W$ is the weight tensor, $[ \cdot, \cdot,\cdot]$ denotes tensor indexing, $C_{in}$ is the number of input channels, and $b[c_o]$ is the bias. Batch Normalization normalizes each channel, and the normalized output for each channel is expressed as
+\begin{equation}
+\hat{x}[c] = \gamma[c] \frac{x[c] - \mu[c]}{\sigma[c]} + \beta[c],
+\label{eq:bn}
+\end{equation}
+where $x[c]$ is the input for channel $c$, $\mu[c]$ and $\sigma[c]$ are the channel's running mean and standard deviation, and $\gamma[c]$ and $\beta[c]$ are the learned scale and shift parameters, respectively. ReLU activation applies element-wise, $\text{ReLU}(x) = \max(0, x)$, where $x$ is the input value and $\max$ returns the maximum of its arguments. The identity skip connection computes $y = F(x) + x$, when channel dimensions match; when they do not, a $1\times1$ projection convolution adjusts the identity as $y = F(x) + W_p\ast x$, where $x$ is the input tensor, $y$ is the output tensor, $F(x)$ is the residual mapping function, and $W_p$ is the $1\times1$ projection weight matrix. Global Average Pooling reduces each channel to a scalar. The pooled output scalar for channel $c$ is given as $ z[c] = \frac{1}{T} \sum_{t=0}^{T-1} x[c, t],$
+where $T$ is the temporal sequence length, $t$ is the time step index, and $x[c, t]$ is the input value at channel $c$ and time step $t$. Since $T = 32$, the hardware division is replaced by a signed arithmetic right shift of 5 positions, eliminating all division circuitry from the pooling datapath. The argmax classification selects $\hat{c} = \arg\max_{j \in \{0,1,2,3\}} l[j]$, and an anomaly flag is asserted whenever $\hat{c} \neq 0$, where $\hat{c}$ is the predicted class index, $\arg\max$ is the operation returning the argument that gives the maximum value, $j$ is the class index iterating over the four classes, and $l[j]$ is the logit score for class $j$.
+
+\section{INT8 Quantization and FPGA Implementation}
+
+% [FIX] Restored missing opening sentence with correct citation b18 (Jacob, quantization)
+This work employs symmetric per-tensor post-training quantization (PTQ) \cite{b18}. Asymmetric quantization requires a zero-point subtraction in every MAC operation, expanding to four terms per multiply-accumulate and doubling the effective multiply count in hardware. Symmetric quantization ($z = 0$) keeps the MAC as a single signed multiply with no offset accumulation, saving significant LUT and DSP resources. For a floating-point weight tensor $W$, the quantization scale factor $s_W$ maps the maximum absolute weight value to the INT8 ceiling of 127, given as $s_W = \frac{\max(|W|)}{2^{b-1} - 1},$
+where $b$ is the quantization bit-width, $\max$ denotes the maximum function, and $|W|$ denotes the element-wise absolute value of the weight tensor $W$. Each weight element is quantized by rounding to the nearest integer and clamping to $[-128, 127]$. The resulting quantized weight tensor is expressed as
+\begin{equation}
+W_q = \text{clamp}\left(\text{round}\left(\frac{W}{s_W}\right), -128, 127\right),
+\label{eq:quant}
+\end{equation}
+where $\text{round (.)}$ is the round-to-nearest-integer operation, and $\text{clamp}(v, \min, \max)$ restricts the value $v$ to the range $[\min, \max]$.
+Prior to quantization, every BatchNorm layer is algebraically absorbed into its preceding convolution. The folded weight is computed per output channel $c_o$ as
+\begin{equation}
+\tilde{W}[c_o, c_i, k] = \frac{\gamma[c_o]}{\sigma[c_o]} W[c_o, c_i, k],
+\label{eq:bnfold_w}
+\end{equation}
+where $c_i$ denotes the input channel,  $k$ denotes the kernel index, $W[c_o, c_i, k]$ is the original convolution weight, and $\gamma[c_o]$ and $\sigma[c_o]$ are the BatchNorm scale and standard deviation for output channel $c_o$. The folded bias absorbs both the original convolution bias and the complete BN affine transformation. The folded bias for output channel $c_o$ is expressed as
+\begin{equation}
+\tilde{b}[c_o] = \frac{\gamma[c_o] \cdot (b[c_o] - \mu[c_o])}{\sigma[c_o]} + \beta[c_o],
+\label{eq:bnfold_b}
+\end{equation}
+where $b[c_o]$ is the original convolution bias, and $\mu[c_o]$ and $\beta[c_o]$ are the BatchNorm running mean and shift parameter for output channel $c_o$. Applying this across all six Conv--BN pairs in ResNet-1D removes every running-mean accumulator, running-variance accumulator, and per-channel divider from the hardware, reducing RTL complexity significantly.
+
+Each MAC operation multiplies a signed INT8 weight by a signed INT8 input activation, producing a signed 16-bit product. Products are accumulated across all $C_{in} K$ terms into a signed 24-bit register. The maximum accumulation magnitude for the worst-case layer ($C_{in} K = 32 \times 3 = 96$ terms) is $96 \times 127^2 = 1,548,384$, requiring only 21 bits plus sign---well within the 24-bit accumulator capacity of 8,388,608. After the full dot product and bias addition, the result is saturated back to INT8: $\text{out}_8 = \text{clamp}(\text{acc}_{24} + b_q, -128, 127)$,
+where $\text{out}_8$ is the saturated 8-bit output, $\text{acc}_{24}$ is the 24-bit accumulated dot product, and $b_q$ is the quantized folded bias.
+This model uses PTQ rather than quantization-aware training (QAT) because QAT incorporates simulated quantization noise during the training loop, allowing the network to adapt its weight distribution to the quantization grid.
+%However, QAT requires retraining with a modified loss landscape, adds significant training complexity, and may overfit to the quantization scheme.
+%\section{FPGA Implementation}
+%\label{sec:hw}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+ \includegraphics[width=3.4in, height=2.5in]{Fig1.jpeg}
+\caption{Physical floorplan and post-implementation resource mapping of the proposed adaptive-precision accelerator on the xc7z020 FPGA fabric.}
+\label{fig:impl}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure*}[t]
+\centering
+\begin{minipage}[t]{0.49\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{radarnet_hw_overview.pdf}
+  \caption{Top-level hardware architecture of the RadarNet-1D accelerator showing streaming input buffer, shared Weight ROM, pipelined convolutional datapath, and classifier backend.}
+  \label{fig:hw_overview}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{radarnet_dsp_mac_engine.pdf}
+  \caption{Microarchitecture of the parameterized INT8 Conv1D engine and DSP48E1 slice mapping with hardware address generation.}
+  \label{fig:dsp_mac}
+\end{minipage}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Fig.~\ref{fig:impl} illustrates the physical deployment on the ZedBoard platform alongside its post-implementation Vivado floorplan which highlights the physical location of various on-chip units like 1D convolution engines, Weight ROM, and built-in debugging IPs on chip and verifies the extremely small space occupied by the INT8-quantized design that efficiently maps ResNet-1D to the Zynq-7000 logic fabric without encountering any routing overflow.
+%A top-level module implements the eight-state Moore FSM shown in Fig.~\ref{fig:fsm}, clocked at 142~MHz and targeting Xilinx 7-Series FPGA platforms. In state \textbf{IDLE}, wait for start pulse, which indicates the start of the process, clear busy flag, which indicates if the FSM is doing some operation in a state, de-assert done, which is used to signal the process is over after reaching the final state, res\_valid (result valid) are all set to low. After starting, state \textbf{LOAD} stores 128 I/Q data pairs whenever iq\_valid is high. State \textbf{CONV\_IN} starts convolution using the first two layers, waits until conv\_in\_done, which signals the end of the convolution operation, and becomes true.  In states \textbf{RES\_BLK1} and \textbf{RES\_BLK2}, we implement respectively residual blocks with identity skip and $1 \times 1$ projection skip, waiting until res\_blk1\_done and res\_blk2\_done, which indicate the completion of the above-mentioned operations, become true. In state \textbf{GAP}, global average pooling is executed, and gap\_done is asserted when this execution is completed. In state \textbf{FC\_OUT}, $64 \times 4$ matrix multiplication is carried out, then the argument of the maximum function is run, which finds the index of the largest value in a list. Finally, anomaly\_flag is set to high if the prediction is not class 0.
+%In state \textbf{DONE}, capture class\_id, raise done and res\_valid signal to report completion, save total inference cycle, then return to \textbf{IDLE}.
+
+The RTL is a fully custom, hand-written Verilog implementation with zero HLS tooling dependencies. The architecture includes a parameterized INT8 MAC engine, residual blocks with identity and $1\times1$ projection convolutions, arithmetic-shift-based GAP, and a combinational argmax with binary anomaly flagging. Every module was derived directly from the governing equations and verified cycle-accurately against Python golden references. This contrasts with HLS-based approaches that sacrifice RTL transparency and fine-grained resource control.
+
+The MAC engine traverses output channels, time positions, input channels, and kernel taps in a four-level nested FSM, fully utilizing all INT8 multipliers and maximizing throughput from each available DSP slice. Three key resource optimizations distinguish this work from baseline FPGA CNN implementations: BN folding eliminates all six BN layers from the RTL, removing running-mean accumulators, running-variance accumulators, and per-channel dividers entirely; GAP replaces division by $T=32$ with a 5-bit arithmetic right shift, consuming zero multiplier cells in the pooling datapath. INT8 symmetric quantization compresses weight storage to 28.6~KB, fitting in a single 36 KB BRAM block on the Zynq-7000, avoiding multi-BRAM arbitration overhead.
+
+The complete co-design stack spans five stages: (1) Python preprocessing generating INT8 test vectors; (2) PyTorch BN folding and quantization producing hex files; (3) weight export scripts merging into a 32,768-entry Read-Only Memory (ROM); (4) cycle-accurate simulation targeting the generated golden vectors; and (5) Vivado RTL synthesis with deep hardware debug integration for on-device ZedBoard validation. Specifically, an Integrated Logic Analyzer (ILA) core triggers on the \texttt{start} pulse to capture cycle-level waveform data on the physical FPGA. %(Fig.~\ref{fig:ila_trigger}), while
+A Virtual Input/Output (VIO) core provides real-time software dashboard control over inputs like \texttt{iq\_data} and probes state outputs such as \texttt{anomaly\_flag} and \texttt{result\_valid}.
+
+% Placeholder for ILA Trigger figure
+%\begin{figure}[htbp]
+%\centerline{\includegraphics[width=\columnwidth]{ilatrigger_updt.png}}
+%\caption{ILA trigger on inference start, showing hardware execution state transition matching behavioral simulation.}
+%\label{fig:ila_trigger}
+%\end{figure}
+
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=7in, height=1in]{ilatrigger_updt.png}
+%\caption{ILA trigger on inference start, showing hardware execution state transition matching behavioral simulation.}
+%\label{fig:ila_trigger}
+%\end{figure*}
+
+% Placeholder for VIO Dashboard figure
+%\begin{figure}[htbp]
+%\centerline{\includegraphics[width=\columnwidth]{viodashboard.png}}
+%\caption{VIO Dashboard probing hardware registers. The anomaly flag correctly asserts when anomalous I/Q patterns are injected.}
+%\label{fig:vio_dashboard}
+%\end{figure}
+
+\section{Results}
+This section evaluates the proposed system along two axes: classification performance of the ResNet-1D model under the four-class operational signal taxonomy, and the resource, timing, and power characteristics of the synthesized RTL accelerator on the Xilinx Zynq-7000 ZedBoard platform.
+%\subsection{Training and Classification Performance}
+The ResNet-1D model was trained using PyTorch with the Adam optimizer \cite{b19} at an initial learning rate of $1 \times 10^{-3}$ and weight decay $1 \times 10^{-4}$. A cosine annealing learning rate schedule reduced the rate to $\eta_{\min} = 1 \times 10^{-6}$ over a 60-epoch budget. Early stopping with patience 10 terminated training at epoch 50. Cross-entropy loss was used with a mini-batch size of 256.
+
+Table~\ref{tab:perclass} reports per-class precision, recall, and F1-score on the held-out test set of 30,000 balanced samples. Normal signal classification achieves near-perfect F1 (99.21\%) due to the distinct narrowband spectral characteristics of continuous-wave modulations. Spoofer classification achieves 95.22\% F1, benefiting from the coherent phase structure of PSK modulations. Jammer (69.56\% F1) and Interference (68.57\% F1) exhibit lower scores, attributable to spectral overlap between wideband modulations assigned to different signal classes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Per-Class Performance on Test Set}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Class} & \textbf{Precision (\%)} & \textbf{Recall (\%)} & \textbf{F1 (\%)} & \textbf{Support} \\
+\midrule
+Normal      & 99.16 & 99.27 & 99.21 & 7,500 \\
+Jammer      & 69.68 & 69.45 & 69.56 & 7,500 \\
+Spoofer     & 94.11 & 96.36 & 95.22 & 7,500 \\
+Interference& 69.33 & 67.83 & 68.57 & 7,500 \\
+\midrule
+\textbf{Overall} & \textbf{83.07} & \textbf{83.23} & \textbf{83.14} & \textbf{30,000} \\
+\bottomrule
+\end{tabular}
+\label{tab:perclass}
+\end{center}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Quantization Pipeline Impact}
+
+Table~\ref{tab:quant} tracks test accuracy at each stage of the quantization pipeline. BN folding via \eqref{eq:bnfold_w} and \eqref{eq:bnfold_b} is algebraically exact and introduces zero accuracy change within floating-point precision. INT8 symmetric quantization introduces 0.05 percentage-point degradation---well within the design target of less than 1\% and consistent with the theoretical bound of $\pm 0.5 s_W$ per weight element \cite{b18}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Test Accuracy at Each Stage of the Quantization Pipeline}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Pipeline Stage} & \textbf{Accuracy (\%)} & \textbf{$\Delta$ (\%)} \\
+\midrule
+FP32 Baseline  & 83.23 & --- \\
+After BN Folding (FP32) & 83.23 & 0.00 \\
+After INT8 Quantization & 83.18 & $-$0.05 \\
+\bottomrule
+\end{tabular}
+\label{tab:quant}
+\end{center}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Vivado Synthesis and Power Results}
+Vivado synthesis targeting the Xilinx Zynq-7000 SoC available on the ZedBoard platform results in the power numbers presented in Table~\ref{tab:power} and resource utilization in Table~\ref{tab:utilization}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+\includegraphics[width=3.5in, height=1.7in]{behavorial_sim.png}
+\caption{Behavioral simulation showing incrementing cycle\_count every inference, FSM state transitions, I/Q data streaming, and control signals.}
+\label{fig:waveform}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The on-chip power is shown in Table~\ref{tab:power}.
+%Total power is 0.671 W, composed of 0.559 W dynamic power (83\%) and 0.113 W device static power (17\%). The power consumed by clock distribution and routing is 0.271 W (49\%) and 0.152 W (27\%), respectively, which contributes to the highest power portion of the dynamic power. Combinational logic power consumes 0.130 W (23\%), and the power of BRAM and I/O is negligible.  The resulting junction temperature of 32.7$^{\circ}$C gives 52.3$^{\circ}$C of margin above the maximum junction temperature expected for systems deployed in the edge.
+% [FIX] Added latency breakup: 56 cycles at 142 MHz design clock = 0.56 μs, at achieved Fmax 142 MHz = 0.776 μs
+The synthesized design satisfies all hold and pulse-width constraints, achieving a maximum operating frequency of 142 MHz. As shown in Table~\ref{tab:utilization}, the design uses 18.82\% of the total LUTs and 5.13\% of the total flip-flops. This indicates that the proposed ResNet-1D inference datapath is a good fit for the target FPGA logic fabric. The BRAM utilization of 10.71\% indicates that both the weight ROM and intermediate feature maps can be comfortably stored in on-chip memory resources, which aligns with our 28.6~KB INT8 weight storage strategy. Input/Output (I/O) usage of 0.50\% is also minimal due to the fully self-contained accelerator running from internal BRAM memory.
+
+
+Fig.~\ref{fig:waveform} shows the simulation waveform for the design, which, together with the behavioral simulation, indicates that the inference completes in 56 clock cycles. At the maximum post-implementation operating frequency of 142~MHz, this yields a realized hardware latency of $56 \times 13.85\text{~ns} \approx 0.78$~$\mu$s. The measured cycle counter will increase from 0x35 to 0x39 when the LOAD state is executing, which is consistent with cycle-accurate designs.
+
+% Placeholder for Vivado Schematic
+%\begin{figure}[htbp]
+%\centerline{\includegraphics[width=\columnwidth]{schematic.png}}
+%\caption{Vivado Schematic --- Top-level netlist showing VIO, radarnet\_top, ILA, LUT1, and dbg\_hub blocks (7 Cells, 1 I/O Port, 173 Nets).}
+%\label{fig:schematic}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Placeholder for Power Analysis
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption{On-Chip Power Estimation on Xilinx xc7z020clg484-1 (Zynq-7000)}
+\label{tab:power}
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Share (\%)} \\
+\midrule
+\textbf{Total On-Chip Power} & \textbf{0.671 W} & --- \\
+\quad Dynamic Power & 0.559 W & 83 \\
+\quad Device Static Power & 0.113 W & 17 \\
+\midrule
+\multicolumn{3}{l}{\textit{Dynamic Power Breakdown}} \\
+\quad Clocks & 0.271 W & 49 \\
+\quad Signals & 0.152 W & 27 \\
+\quad Logic & 0.130 W & 23 \\
+\quad BRAM & 0.005 W & 1 \\
+\quad I/O & $<$0.001 W & $<$1 \\
+\midrule
+Junction Temperature & 32.7$^{\circ}$C & --- \\
+Thermal Margin & 52.3$^{\circ}$C (4.4 W) & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Placeholder for Resource Utilization
+\begin{table}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption{FPGA Resource Utilization on Xilinx xc7z020clg484-1 (Zynq-7000)}
+\label{tab:utilization}
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Resource} & \textbf{Used} & \textbf{Available} & \textbf{Utilization (\%)} \\
+\midrule
+LUT & 10,012 & 53,200 & 18.82 \\
+FF & 5,461 & 106,400 & 5.13 \\
+BRAM & 15 & 140 & 10.71 \\
+IO & 1 & 200 & 0.50 \\
+\bottomrule
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Placeholder for Simulation Waveform
+%\begin{figure}[htbp]
+%\centerline{\includegraphics[width=\columnwidth]{behavorialsim.png}}
+%\caption{Vivado Simulation Waveform --- Behavioral simulation showing incrementing cycle\_count every inference, FSM state transitions, I/Q data streaming, and control signals.}
+%\label{fig:waveform}
+%\end{figure}
+%\subsection{Comparison with Prior FPGA RF Classifiers}
+
+The proposed accelerator is contextualized relative to other FPGA-based RF classification accelerators in Table~\ref{tab:comparison}.
+%DeepRadio, an FPGA-based deep learning-based RF signal classifier, was proposed by Chang \emph{et al.}~\cite{b8} that can classify the signals received from the RF frontend in real-time while consuming very little power. The framework proposed by Umuroglu \emph{et al.}~\cite{b20}, FINN, leverages binary neural networks implemented on Xilinx FPGAs to deliver extremely high throughput while sacrificing the expressiveness of the model. hls4ml is another framework proposed by Duarte \emph{et al.}~\cite{b12} that automatically converts trained neural networks into FPGA firmware using HLS, and BatchNorm fusion support was available.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table*}[t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Comparison with FPGA-Based RF Classifiers}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Metric} & \textbf{Proposed} & \textbf{DeepRadio \cite{b8}} & \textbf{hls4ml \cite{b12}} & \textbf{FINN-based \cite{b20}} & \textbf{RFSoC-AMC \cite{b9}} \\
+\midrule
+\textbf{Model Architecture} & ResNet-1D (8-layer) & Custom CNN & Configurable & BNN & VGG10/ResNet33 \\
+\textbf{Dataset} & RadioML 2018.01A & Proprietary RF & RadioML & RadioML & RadioML 2018.01A \\
+\textbf{Quantization} & INT8 (PTQ) & Fixed-point 16-bit & Mixed fixed-point & 1-bit (Binary) & INT8 (HLS) \\
+\textbf{HLS Dependency} & \textbf{None (custom RTL)} & Partial & Full HLS & Full HLS & Full HLS \\
+\textbf{Signal Taxonomy} & \textbf{4-class Signal} & Per-modulation & Per-modulation & Per-modulation & Per-modulation \\
+\textbf{Accuracy (\%)} & 83.18 & $\sim$80 & $\sim$85 & $\sim$80.1 & $\sim$90 \\
+\textbf{Latency ($\mu$s)} & \textbf{0.78} & $\sim$5 & $\sim$1--10 & $\sim$283 & $\sim$10 \\
+\textbf{Power (W)} & \textbf{0.671} & $\sim$2--5 & $\sim$1--3 & $\sim$3.86 & $\sim$5--10 \\
+\textbf{Energy/Inf. ($\mu$J)} & \textbf{0.38} & $\sim$10--25 & $\sim$1--30 & $\sim$1.21 & $\sim$50--142 \\
+\textbf{Weight Storage (KB)} & \textbf{28.6} & $>$142 & Variable & $\sim$187.5 & $>$500 \\
+\textbf{Target FPGA} & Zynq-7000 & Zynq UltraScale+ & Various & Zynq-7000 & RFSoC ZU+ \\
+\textbf{Parameters} & 29,252 & $>$142K & Variable & $>$1.5M & $>$1M \\
+\bottomrule
+\end{tabular}
+\label{tab:comparison}
+\end{center}
+\footnotesize{BNN: Binary Neural Network.}
+\end{table*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The proposed implementation achieves the lowest inference latency (0.78~$\mu$s) and power consumption (0.671~W) among comparable INT8 implementations by eliminating HLS design overhead and fitting the compact 29,252-parameter model entirely within on-chip BRAM. This results in an inference energy consumption of only 0.38~$\mu$J, which is particularly attractive for battery-powered or thermally constrained edge deployments. Although binarized approaches such as FINN may achieve comparable or lower latency, they generally sacrifice representational capacity and classification accuracy. RFSoC-based deployments attain higher accuracy on the full 24-class modulation-recognition problem but rely on substantially larger and more power-hungry hardware platforms, making direct latency and power comparisons less meaningful for edge-focused deployments.
+
+\section{Conclusion}
+% [FIX] "vanished gradient" → "vanishing gradient", added missing "of" before 0.78
+This work has presented an end-to-end system design for real-time RF anomaly detection at the sensor edge. The utilization of ResNet-1D architecture resolved the problem of vanishing gradient associated with a standard 1D CNNs with the aid of identity and $1\times1$ projection skip connections for training a deeper eight-layer network comprising 29,252 weights on RadioML 2018.01A with 83.23\% FP32 testing accuracy. The folded BN and INT8 quantized model only incurred a less than 0.05\% accuracy degradation from the FP32 base model, thereby downsizing the required weight storage to 28.6~KB so that it can be fit in the on-chip BRAM of Zynq-7000 hardware platforms. Furthermore, our Vivado synthesis and implementation leads to a significantly small on-chip power consumption of 0.671~W, a minimal junction temperature of 32.7$^{\circ}$C, and, consequently, a latency of 0.78~$\mu$s.
+%, which is better by over four orders of magnitude compared with GPU-based solutions.
+%These characteristics make the proposed accelerator a strong candidate for deployment in edge-based spectrum-monitoring systems where low latency, low power, and deterministic operation are critical.
+
+%\section{Acknowledgments}
+%Portions of this manuscript were refined using AI-based writing assistants for grammar, clarity, and style. All scientific content, methodology, and analysis were developed and authored by the researchers.
+
+\begin{thebibliography}{00}
+
+\bibitem{b1} A. C. S. Thakur and M. Imtiaz, ``Deep learning for automatic modulation classification: A review,'' \emph{Electronics}, vol. 15, no. 10, p. 2163, May 2026.
+
+\bibitem{b2} H. Xu, Y. Liang, R. Xie, and Y. Kong, ``The deep learning evolution in wireless physical layer communications: Applications, challenges, and evolutionary directions,'' \emph{Sensors}, vol. 26, no. 11, p. 3609, Jun. 2026.
+
+\bibitem{b3} DeepSig Inc., ``RadioML 2018.01A dataset,'' 2018. [Online]. Available: https://www.deepsig.ai/datasets
+
+\bibitem{b4} S. Ansari et al., ``Attention-enhanced hybrid automatic modulation classification for advanced wireless communication systems: A deep learning-transformer framework,'' \emph{IEEE Access}, vol. 13, 2025.
+
+\bibitem{b5} F. Zhu et al., ``Robust deep learning-based physical layer communications: Strategies and approaches,'' \emph{IEEE Netw.}, 2025.
+
+\bibitem{b6} S. Chatterjee, S. Ghosh, T. Ghosh, and H. Rahaman, ``Architectural design and performance analysis of FPGA based AI accelerators: A comprehensive review,'' arXiv preprint arXiv:2603.08740, Feb. 2026.
+
+\bibitem{b7} X. Chen, X. Tian, Q. Zheng, and W. Wang, ``Attention mechanism enabled wireless modulation recognition network,'' \emph{Eng. Lett.}, vol. 33, no. 4, Apr. 2025.
+
+\bibitem{b8} E. Chang, D. Cheng, and F. T. Luk, ``DeepRadio: Real-time FPGA deep learning for RF signal classification in electronic warfare,'' in \emph{Proc. IEEE Mil. Commun. Conf. (MILCOM)}, Norfolk, VA, Nov. 2019, pp. 1--6.
+
+\bibitem{b9} E. Chang \emph{et al.}, ``Real-time modulation classification on Xilinx RFSoC using deep neural networks,'' in \emph{Proc. IEEE Int. Symp. Circuits Syst. (ISCAS)}, Seville, Spain, May 2020, pp. 1--5.
+
+\bibitem{b10} D. J. M. Moss, D. Boland, P. Pourbeik, and P. H. W. Leong, ``Real-time FPGA-based anomaly detection for radio frequency signals,'' in \emph{Proc. IEEE Int. Symp. Circuits Syst. (ISCAS)}, Florence, Italy, May 2018, pp. 1--5.
+
+\bibitem{b11} T. J. O'Shea, T. Roy, and T. C. Clancy, ``Over-the-air deep learning based radio signal classification,'' \emph{IEEE J. Sel. Topics Signal Process.}, vol. 12, no. 1, pp. 168--179, Feb. 2018.
+
+\bibitem{b12} J. Duarte \emph{et al.}, ``Fast inference of deep neural networks in FPGAs for particle physics,'' \emph{J. Instrum.}, vol. 13, no. 07, p. P07027, Jul. 2018.
+
+\bibitem{b13} X. Wang, Y. Zhao, and Z. Huang, ``A survey of deep transfer learning in automatic modulation classification,'' \emph{IEEE Trans. Cogn. Commun. Netw.}, vol. 11, no. 3, pp. 1357-1381, June 2025.
+
+\bibitem{b14} L. Zhang, T. Zhou, J. Yang, Y. Li, Z. Zhang, X. Hu, and Y. Peng, ``A real-time signal measurement system using FPGA-based deep learning accelerators and microwave photonic,'' \emph{Remote Sens.}, vol. 16, no. 23, p. 4358, Nov. 2024.
+
+\bibitem{b15} K. He, X. Zhang, S. Ren, and J. Sun, ``Deep residual learning for image recognition,'' in \emph{Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR)}, Las Vegas, NV, Jun. 2016, pp. 770--778.
+
+\bibitem{b16} Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner, ``Gradient-based learning applied to document recognition,'' \emph{Proc. IEEE}, vol. 86, no. 11, pp. 2278--2324, Nov. 1998.
+
+\bibitem{b17} S. Ioffe and C. Szegedy, ``Batch normalization: Accelerating deep network training by reducing internal covariate shift,'' in \emph{Proc. 32nd Int. Conf. Mach. Learn. (ICML)}, Lille, France, Jul. 2015, pp. 448--456.
+
+\bibitem{b18} B. Jacob \emph{et al.}, ``Quantization and training of neural networks for efficient integer-arithmetic-only inference,'' in \emph{Proc. IEEE CVPR}, Salt Lake City, UT, Jun. 2018, pp. 2704--2713.
+
+\bibitem{b19} D. P. Kingma and J. Ba, ``Adam: A method for stochastic optimization,'' in \emph{Proc. Int. Conf. Learn. Representations (ICLR)}, San Diego, CA, USA, May 2015.
+
+\bibitem{b20} Y. Umuroglu et al., ``FINN: A framework for fast, scalable binarized neural network inference,'' in \emph{Proc. ACM/SIGDA Int. Symp. Field-Program. Gate Arrays (FPGA)}, Monterey, CA, Feb. 2017, pp. 65--74.
+
+\end{thebibliography}
+
+\end{document}

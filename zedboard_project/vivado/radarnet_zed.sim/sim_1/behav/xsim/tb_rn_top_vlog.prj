@@ -1,5 +1,5 @@
 # compile verilog/system verilog design source files
-verilog xil_defaultlib  -i "../../../../../mem" --include "D:/2025.2/Vivado/data/rsb/busdef" --include "../../../../../mem" -d "RN_VIVADO_SIM" \
+verilog xil_defaultlib  -i "../../../../../mem" --include "D:/2025.2/Vivado/data/rsb/busdef" --include "../../../../../mem" --include "../../../../radarnet_zed.gen/sources_1/bd/rn_bd/ipshared/ec67/hdl" --include "../../../../radarnet_zed.gen/sources_1/bd/rn_bd/ipshared/9a25/hdl" --include "D:/2025.2/Vivado/data/xilinx_vip/include" -d "RN_VIVADO_SIM" \
 "../../../../../../rtl_v2/src/rn_buf.v" \
 "../../../../../../rtl_v2/src/rn_gap.v" \
 "../../../../../../rtl_v2/src/rn_pe_array.v" \

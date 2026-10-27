@@ -1,7 +1,7 @@
 Vivado Simulator v2025.2
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
-Running: D:/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -generic_top W=8 -generic_top NC=4 -generic_top NUM_VECTORS=50 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot tb_rn_top_behav xil_defaultlib.tb_rn_top xil_defaultlib.glbl -log elaborate.log 
+Running: D:/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -generic_top W=8 -generic_top NC=4 -generic_top NUM_VECTORS=50 -L xil_defaultlib -L xilinx_vip -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot tb_rn_top_behav xil_defaultlib.tb_rn_top xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer

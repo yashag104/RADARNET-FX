@@ -36,8 +36,21 @@ module tb_rn_top;
     reg [7:0]   true_cls [0:NUM_VECTORS-1];
     reg [31:0]  lg_words [0:NUM_VECTORS*NC-1];
 
-    integer v, s, j, n_exact, n_cls, n_true, fd;
+    integer v, s, j, n_exact, n_cls, n_true;
     reg ok;
+
+    // ── Waveform helpers: add these to the wave window ───────────────
+    //   wv_vector       index of the vector being processed
+    //   wv_expected     class the golden integer model predicts for it
+    //   wv_true_label   dataset label of that vector
+    //   wv_hw_correct   1 at result_valid if the hardware class == wv_expected
+    //   wv_label_match  1 at result_valid if the hardware class == wv_true_label
+    //   n_cls / n_true  running counts of the two (n_exact: all logits identical)
+    wire [31:0] wv_vector      = v;
+    wire [7:0]  wv_expected    = gold_cls[v];
+    wire [7:0]  wv_true_label  = true_cls[v];
+    wire        wv_hw_correct  = result_valid && (class_id == wv_expected);
+    wire        wv_label_match = result_valid && (class_id == wv_true_label);
     initial begin
 `ifdef RN_VIVADO_SIM
         // Vivado copies .mem files into the xsim run directory

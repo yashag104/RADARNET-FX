@@ -8,11 +8,14 @@
  * checks both bit-exactly against the golden logits, and times them with the
  * 64-bit ARM generic/global timer (COUNTS_PER_SECOND from the BSP).
  *
- * Results are written to a struct at RESULTS_ADDR (top of OCM) so the xsdb
- * script can read them over JTAG; they are also printed on the UART.
- * After the benchmark the program cycles through power-measurement phases
- * (idle / ARM busy / accelerator busy, 20 s each) and reports the phase in
- * the same struct, for reading the board current at each phase.
+ * UART output (115200 8N1), per vector: the input I/Q samples, the golden /
+ * ARM / FPGA logits, the predicted class vs. the true label, and the timing;
+ * then a summary. Printing happens outside the timed regions.
+ *
+ * Results are also written to a struct at RESULTS_ADDR (top of OCM) so the
+ * xsdb script can read them over JTAG. With RN_POWER_PHASES = 1 the program
+ * afterwards cycles idle / ARM busy / accelerator busy (20 s each) for
+ * measuring board current on header J21.
  */
 #include <stdint.h>
 #include "xil_cache.h"
@@ -22,8 +25,16 @@
 #include "rn_infer.h"
 #include "rn_vectors.h"
 
+/* ── Output options ───────────────────────────────────────────────── */
+#ifndef PRINT_INPUT_SAMPLES
+#define PRINT_INPUT_SAMPLES 16  /* I/Q samples printed per vector (128 = whole frame) */
+#endif
+#ifndef RN_POWER_PHASES
+#define RN_POWER_PHASES     0   /* 1: loop idle / ARM / FPGA phases for power readings */
+#endif
+
 #if defined(__aarch64__)
-#define RN_BASE        0xA0000000u          /* ZCU104: M_AXI_HPM0_FPD */
+#define RN_BASE        0xA0000000u          /* ZCU102/104: M_AXI_HPM0_FPD */
 #else
 #define RN_BASE        0x43C00000u          /* ZedBoard: M_AXI_GP0 */
 #endif
@@ -38,6 +49,15 @@
 #define RESULTS_ADDR   0xFFFF8000u
 #define RESULTS_MAGIC  0x524E4231u          /* "RNB1" */
 #define REPEATS        20
+
+#if RN_NUM_CLASSES == 4
+static const char *const CLASS_NAME[] = {"Normal", "Jammer", "Spoofer", "Interf"};
+#elif RN_NUM_CLASSES == 7
+static const char *const CLASS_NAME[] = {"Normal", "Barrage", "Tone", "Sweep",
+                                         "Pulsed", "Replay", "CoChan"};
+#else
+static const char *const CLASS_NAME[RN_NUM_CLASSES] = {0};
+#endif
 
 typedef struct {
     uint32_t magic;              /* RESULTS_MAGIC once the benchmark is done */
@@ -83,7 +103,79 @@ static int same(const int32_t *a, const int32_t *b)
     return 1;
 }
 
-static void busy_phase(uint32_t phase, uint32_t seconds)
+static int argmax(const int32_t *lg)
+{
+    int best = 0;
+    for (int c = 1; c < RN_NUM_CLASSES; c++)
+        if (lg[c] > lg[best])
+            best = c;
+    return best;
+}
+
+static const char *cname(int c)
+{
+    return (c >= 0 && c < RN_NUM_CLASSES && CLASS_NAME[c]) ? CLASS_NAME[c] : "?";
+}
+
+/* ticks → microseconds with one decimal, printed as "123.4" */
+static void print_us(uint64_t ticks)
+{
+    uint64_t tenths = (ticks * 10000000ull) / COUNTS_PER_SECOND;
+    xil_printf("%d.%d", (int)(tenths / 10), (int)(tenths % 10));
+}
+
+static void print_logits(const char *who, const int32_t *lg)
+{
+    xil_printf("  %-10s", who);
+    for (int c = 0; c < RN_NUM_CLASSES; c++)
+        xil_printf(" %9d", (int)lg[c]);
+    xil_printf("\r\n");
+}
+
+static void print_vector(int v, const int8_t *in, const int32_t *gold, const int32_t *arm,
+                         const int32_t *hw, uint32_t cycles, uint64_t arm_ticks, uint64_t hw_ticks)
+{
+    xil_printf("\r\n------------------------------ vector %d / %d ------------------------------\r\n",
+               v + 1, RN_NUM_VECTORS);
+    xil_printf("input I/Q (INT8, first %d of 128 samples):\r\n", PRINT_INPUT_SAMPLES);
+    for (int base = 0; base < PRINT_INPUT_SAMPLES; base += 16) {
+        xil_printf("  samples %d-%d\r\n    I:", base,
+                   (base + 15 < PRINT_INPUT_SAMPLES ? base + 15 : PRINT_INPUT_SAMPLES - 1));
+        for (int t = base; t < base + 16 && t < PRINT_INPUT_SAMPLES; t++)
+            xil_printf(" %4d", in[t]);
+        xil_printf("\r\n    Q:");
+        for (int t = base; t < base + 16 && t < PRINT_INPUT_SAMPLES; t++)
+            xil_printf(" %4d", in[128 + t]);
+        xil_printf("\r\n");
+    }
+    xil_printf("logits (INT32)\r\n  %-10s", "");
+    for (int c = 0; c < RN_NUM_CLASSES; c++)
+        xil_printf(" %9s", cname(c));
+    xil_printf("\r\n");
+    print_logits("golden", gold);
+    print_logits("ARM (C)", arm);
+    print_logits("FPGA", hw);
+
+    int g = argmax(gold), a = argmax(arm), h = argmax(hw);
+    xil_printf("prediction: FPGA %d (%s)  ARM %d (%s)  golden %d (%s)", h, cname(h), a, cname(a),
+               g, cname(g));
+#ifdef RN_HAVE_LABELS
+    int y = rn_vec_label[v];
+    xil_printf("  | true label %d (%s)", y, cname(y));
+#endif
+    xil_printf("\r\n  FPGA logits %s golden, anomaly flag %d",
+               same(hw, gold) ? "== (bit-exact)" : "!= (MISMATCH)", h != 0);
+#ifdef RN_HAVE_LABELS
+    xil_printf(", %s", h == y ? "correct" : "wrong");
+#endif
+    xil_printf("\r\ntiming: ARM ");
+    print_us(arm_ticks);
+    xil_printf(" us   FPGA ");
+    print_us(hw_ticks);
+    xil_printf(" us (%d PL cycles)\r\n", (int)cycles);
+}
+
+__attribute__((unused)) static void busy_phase(uint32_t phase, uint32_t seconds)
 {
     XTime t0, t;
     int32_t lg[RN_NUM_CLASSES];
@@ -105,38 +197,52 @@ static void busy_phase(uint32_t phase, uint32_t seconds)
 
 int main(void)
 {
-    int32_t lg[RN_NUM_CLASSES];
+    int32_t arm_lg[RN_NUM_CLASSES], hw_lg[RN_NUM_CLASSES];
     XTime t0, t1;
     uint64_t arm_total = 0, hw_total = 0;
-    uint32_t cycles = 0, arm_ok = 0, hw_ok = 0;
+    uint32_t cycles = 0, arm_ok = 0, hw_ok = 0, hw_correct = 0, arm_correct = 0;
 
     R->magic = 0;
     R->phase = 0;
     R->info = Xil_In32(RN_INFO);
     publish();
-    xil_printf("\r\nRadarNet-1D benchmark  INFO=%08x  vectors=%d\r\n",
-               (unsigned)R->info, RN_NUM_VECTORS);
+    xil_printf("\r\n==================================================================\r\n");
+    xil_printf(" RadarNet-1D benchmark: Cortex-A9 software vs FPGA accelerator\r\n");
+    xil_printf(" accelerator INFO = 0x%08x (W=%d, classes=%d), %d test vectors\r\n",
+               (unsigned)R->info, (int)(R->info & 0xFF), (int)((R->info >> 8) & 0xFF),
+               RN_NUM_VECTORS);
+    xil_printf("==================================================================\r\n");
 
     for (int v = 0; v < RN_NUM_VECTORS; v++) {
         const int8_t *in = rn_vec_in + v * 256;
         const uint16_t *iq = rn_vec_iq + v * 128;
         const int32_t *gold = rn_vec_logits + v * RN_NUM_CLASSES;
 
-        rn_infer(in, lg);                                /* warm caches */
-        arm_ok += same(lg, gold);
+        /* ARM: one checked run (also warms the caches), then REPEATS timed runs */
+        rn_infer(in, arm_lg);
+        arm_ok += same(arm_lg, gold);
         XTime_GetTime(&t0);
         for (int r = 0; r < REPEATS; r++)
-            rn_infer(in, lg);
+            rn_infer(in, arm_lg);
         XTime_GetTime(&t1);
+        uint64_t arm_t = (t1 - t0) / REPEATS;
         arm_total += (t1 - t0);
 
-        hw_infer(iq, lg, &cycles);
-        hw_ok += same(lg, gold);
+        /* FPGA: one checked run, then REPEATS timed runs */
+        hw_infer(iq, hw_lg, &cycles);
+        hw_ok += same(hw_lg, gold);
         XTime_GetTime(&t0);
         for (int r = 0; r < REPEATS; r++)
-            hw_infer(iq, lg, 0);
+            hw_infer(iq, hw_lg, 0);
         XTime_GetTime(&t1);
+        uint64_t hw_t = (t1 - t0) / REPEATS;
         hw_total += (t1 - t0);
+
+#ifdef RN_HAVE_LABELS
+        hw_correct += (argmax(hw_lg) == rn_vec_label[v]);
+        arm_correct += (argmax(arm_lg) == rn_vec_label[v]);
+#endif
+        print_vector(v, in, gold, arm_lg, hw_lg, cycles, arm_t, hw_t);
     }
 
     R->n_vectors = RN_NUM_VECTORS;
@@ -149,15 +255,36 @@ int main(void)
     R->magic = RESULTS_MAGIC;
     publish();
 
-    xil_printf("bit-exact: ARM %d/%d  accelerator %d/%d\r\n", (int)arm_ok, RN_NUM_VECTORS,
+    uint64_t speedup10 = (10ull * R->arm_ticks) / (R->hw_ticks ? R->hw_ticks : 1);
+    xil_printf("\r\n============================== SUMMARY ==============================\r\n");
+    xil_printf(" bit-exact vs golden : ARM %d/%d   FPGA %d/%d\r\n", (int)arm_ok, RN_NUM_VECTORS,
                (int)hw_ok, RN_NUM_VECTORS);
-    xil_printf("ARM: %d ticks/inf   accelerator: %d ticks/inf (incl. AXI), %d PL cycles\r\n",
-               (int)R->arm_ticks, (int)R->hw_ticks, (int)cycles);
+#ifdef RN_HAVE_LABELS
+    xil_printf(" correct vs label    : ARM %d/%d   FPGA %d/%d   (%d vectors only; the model's\r\n"
+               "                       accuracy is measured on the 30,000-sample test set)\r\n",
+               (int)arm_correct, RN_NUM_VECTORS, (int)hw_correct, RN_NUM_VECTORS, RN_NUM_VECTORS);
+#endif
+    xil_printf(" mean ARM time       : ");
+    print_us(R->arm_ticks);
+    xil_printf(" us / inference  (%d timer ticks)\r\n", (int)R->arm_ticks);
+    xil_printf(" mean FPGA time      : ");
+    print_us(R->hw_ticks);
+    xil_printf(" us / inference  (%d ticks, incl. 128 AXI sample writes)\r\n", (int)R->hw_ticks);
+    xil_printf(" FPGA cycle counter  : %d PL cycles (start -> result)\r\n", (int)cycles);
+    xil_printf(" speed-up            : %d.%dx\r\n", (int)(speedup10 / 10), (int)(speedup10 % 10));
+    xil_printf(" timer               : %d Hz\r\n", (int)COUNTS_PER_SECOND);
+    xil_printf("=====================================================================\r\n");
 
+#if RN_POWER_PHASES
     for (;;) {                                           /* power measurement phases */
         busy_phase(1, 20);
         busy_phase(2, 20);
         busy_phase(3, 20);
     }
+#else
+    xil_printf("done.\r\n");
+    for (;;)
+        ;
+#endif
     return 0;
 }
