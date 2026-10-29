@@ -1,0 +1,178 @@
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Wed Oct 28 16:56:17 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source {C:\Users\hp\RADARNET-FX\results\hier_tmp\q2.tcl}
+# open_checkpoint C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/impl_1/rn_bd_wrapper_routed.dcp
+Command: open_checkpoint C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/impl_1/rn_bd_wrapper_routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.085 . Memory (MB): peak = 327.621 ; gain = 6.305
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.107 . Memory (MB): peak = 793.031 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 551 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 905.254 ; gain = 2.879
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Read placeStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.287 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.133 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Read Physdb Files: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.466 . Memory (MB): peak = 1516.973 ; gain = 0.000
+Restored from archive | CPU: 0.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.512 . Memory (MB): peak = 1516.973 ; gain = 2.945
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1516.973 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2025.2 (64-bit) build 6299465
+open_checkpoint: Time (s): cpu = 00:00:25 ; elapsed = 00:00:22 . Memory (MB): peak = 1521.418 ; gain = 1208.645
+# foreach c [get_cells -hier -filter {REF_NAME =~ RAMB*}] { puts "BRAM $c [get_property REF_NAME $c]" }
+BRAM rn_bd_i/rn/inst/u_rn/p_q_reg_0 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/p_q_reg_1 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/p_q_reg_2 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/p_q_reg_3 RAMB18E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_0 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_1 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_2 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_3 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_4 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_5 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_6 RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/w_q_reg_7 RAMB18E1
+BRAM rn_bd_i/rn/inst/u_rn/fbuf[0].u_buf/mem_reg RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/fbuf[1].u_buf/mem_reg RAMB36E1
+BRAM rn_bd_i/rn/inst/u_rn/fbuf[2].u_buf/mem_reg RAMB36E1
+# foreach c [get_cells -hier -filter {REF_NAME =~ DSP48*}] { puts "DSP $c" }
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[0]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[1]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[2]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[3]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[4]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[5]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[6]
+DSP rn_bd_i/rn/inst/u_rn/r2_m_reg[7]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[0]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[1]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[2]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[3]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[4]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[5]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[6]
+DSP rn_bd_i/rn/inst/u_rn/r2_sk_reg[7]
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[0].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[1].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[2].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[3].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[4].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[5].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[6].lvl[3].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[0].nd[0].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[0].nd[2].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[0].nd[4].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[0].nd[6].mul.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[1].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[1].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[1].nd[2].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[1].nd[3].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[2].nd[0].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[2].nd[1].add.s_reg
+DSP rn_bd_i/rn/inst/u_rn/u_pe/pe[7].lvl[3].nd[0].add.s_reg
+# foreach s {fbuf[0].u_buf fbuf[1].u_buf fbuf[2].u_buf u_gap u_pe} {
+#   set c [get_cells rn_bd_i/rn/inst/u_rn/$s]
+#   set p [get_cells -hier -filter "NAME =~ rn_bd_i/rn/inst/u_rn/$s/* && IS_PRIMITIVE"]
+#   puts "MOD $s LUT=[llength [filter $p {PRIMITIVE_GROUP==LUT}]] FF=[llength [filter $p {PRIMITIVE_GROUP==FLOP_LATCH}]] BRAM=[llength [filter $p {REF_NAME=~RAMB*}]] DSP=[llength [filter $p {REF_NAME=~DSP48*}]]"
+# }
+MOD fbuf[0].u_buf LUT=209 FF=0 BRAM=1 DSP=0
+MOD fbuf[1].u_buf LUT=67 FF=0 BRAM=1 DSP=0
+MOD fbuf[2].u_buf LUT=74 FF=0 BRAM=1 DSP=0
+MOD u_gap LUT=386 FF=271 BRAM=0 DSP=0
+MOD u_pe LUT=360 FF=0 BRAM=0 DSP=88
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 28 16:56:43 2026...

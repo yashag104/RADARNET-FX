@@ -1,0 +1,44 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Wed Oct 28 16:54:36 2026
+| Host         : SaY-PC running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -hierarchical_depth 6 -file C:/Users/hp/RADARNET-FX/results/vivado_reports/zedboard_system_142MHz/rn_bd_wrapper_utilization_hierarchical_routed.rpt
+| Design       : rn_bd_wrapper
+| Device       : xc7z020clg484-1
+| Speed File   : -1
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++--------------------------------------------------+-----------------------------------------------------------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|                     Instance                     |                                          Module                                         | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++--------------------------------------------------+-----------------------------------------------------------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| rn_bd_wrapper                                    |                                                                                   (top) |       3117 |       3032 |       0 |   85 | 2448 |     13 |      2 |        104 |
+|   rn_bd_i                                        |                                                                                   rn_bd |       3117 |       3032 |       0 |   85 | 2448 |     13 |      2 |        104 |
+|     rn                                           |                                                                              rn_bd_rn_0 |       2739 |       2714 |       0 |   25 | 1989 |     13 |      2 |        104 |
+|       (rn)                                       |                                                                              rn_bd_rn_0 |          0 |          0 |       0 |    0 |  192 |      0 |      0 |          0 |
+|       inst                                       |                                                                       rn_bd_rn_0_rn_axi |       2739 |       2714 |       0 |   25 | 1797 |     13 |      2 |        104 |
+|         (inst)                                   |                                                                       rn_bd_rn_0_rn_axi |         11 |         11 |       0 |    0 |   83 |      0 |      0 |          0 |
+|         u_rn                                     |                                                                       rn_bd_rn_0_rn_top |       2729 |       2704 |       0 |   25 | 1714 |     13 |      2 |        104 |
+|           (u_rn)                                 |                                                                       rn_bd_rn_0_rn_top |       1794 |       1775 |       0 |   19 | 1443 |     10 |      2 |         16 |
+|           fbuf[0].u_buf                          |                                                                       rn_bd_rn_0_rn_buf |        209 |        209 |       0 |    0 |    0 |      1 |      0 |          0 |
+|           u_gap                                  |                                                                       rn_bd_rn_0_rn_gap |        305 |        299 |       0 |    6 |  271 |      0 |      0 |          0 |
+|           u_pe                                   |                                                                  rn_bd_rn_0_rn_pe_array |        352 |        352 |       0 |    0 |    0 |      0 |      0 |         88 |
+|     ps_axi_periph                                |                                                                   rn_bd_ps_axi_periph_0 |        361 |        302 |       0 |   59 |  426 |      0 |      0 |          0 |
+|       s00_couplers                               |                                                                s00_couplers_imp_1R7VT9D |        361 |        302 |       0 |   59 |  426 |      0 |      0 |          0 |
+|         auto_pc                                  |                                                       rn_bd_ps_axi_periph_imp_auto_pc_0 |        361 |        302 |       0 |   59 |  426 |      0 |      0 |          0 |
+|           inst                                   | rn_bd_ps_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_axi_protocol_converter |        361 |        302 |       0 |   59 |  426 |      0 |      0 |          0 |
+|             gen_axilite.gen_b2s_conv.axilite_b2s |                    rn_bd_ps_axi_periph_imp_auto_pc_0_axi_protocol_converter_v2_1_37_b2s |        361 |        302 |       0 |   59 |  426 |      0 |      0 |          0 |
++--------------------------------------------------+-----------------------------------------------------------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

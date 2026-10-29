@@ -120,7 +120,9 @@ static const char *cname(int c)
 /* ticks → microseconds with one decimal, printed as "123.4" */
 static void print_us(uint64_t ticks)
 {
-    uint64_t tenths = (ticks * 10000000ull) / COUNTS_PER_SECOND;
+    /* COUNTS_PER_SECOND expands to "XPAR_CPU_CORE_CLOCK_FREQ_HZ/2" without
+     * parentheses, so it must be bracketed here or the result is 4x too small */
+    uint64_t tenths = (ticks * 10000000ull) / (COUNTS_PER_SECOND);
     xil_printf("%d.%d", (int)(tenths / 10), (int)(tenths % 10));
 }
 

@@ -1,0 +1,107 @@
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Wed Oct 28 16:55:21 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source {C:\Users\hp\RADARNET-FX\results\hier_tmp\q.tcl}
+# open_checkpoint C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/impl_1/rn_bd_wrapper_routed.dcp
+Command: open_checkpoint C:/Users/hp/RADARNET-FX/zedboard_project/vivado/radarnet_zed.runs/impl_1/rn_bd_wrapper_routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.092 . Memory (MB): peak = 327.125 ; gain = 5.477
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.161 . Memory (MB): peak = 796.207 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 551 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 907.570 ; gain = 2.695
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Read placeStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.495 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.217 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Read Physdb Files: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.779 . Memory (MB): peak = 1519.953 ; gain = 0.000
+Restored from archive | CPU: 1.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.841 . Memory (MB): peak = 1519.953 ; gain = 1.996
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1519.953 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2025.2 (64-bit) build 6299465
+open_checkpoint: Time (s): cpu = 00:00:39 ; elapsed = 00:00:34 . Memory (MB): peak = 1524.719 ; gain = 1212.277
+# set r rn_bd_i/rn/inst/u_rn
+# foreach c [get_cells -quiet $r/*] { if {![get_property IS_PRIMITIVE $c]} { puts "SUB $c" } }
+SUB rn_bd_i/rn/inst/u_rn/fbuf[0].u_buf
+SUB rn_bd_i/rn/inst/u_rn/fbuf[1].u_buf
+SUB rn_bd_i/rn/inst/u_rn/fbuf[2].u_buf
+SUB rn_bd_i/rn/inst/u_rn/u_gap
+SUB rn_bd_i/rn/inst/u_rn/u_pe
+WARNING: [Vivado 12-180] No cells matched 'get_cells -hier -filter {PRIMITIVE_GROUP == BLOCKRAM}'.
+# foreach c [get_cells -hier -filter {PRIMITIVE_GROUP == BLOCKRAM}] { puts "BRAM $c [get_property REF_NAME $c]" }
+WARNING: [Vivado 12-180] No cells matched 'get_cells -hier -filter {PRIMITIVE_GROUP == ARITHMETIC && REF_NAME =~ DSP*}'.
+# foreach c [get_cells -hier -filter {PRIMITIVE_GROUP == ARITHMETIC && REF_NAME =~ DSP*}] { puts "DSP $c" }
+# array set L {}
+# array set F {}
+# foreach c [get_cells -hier -filter "NAME =~ $r/* && IS_PRIMITIVE"] {
+#   set n [string range $c [expr [string length $r]+1] end]
+#   regsub {[\[/_].*$} $n {} k
+#   set g [get_property PRIMITIVE_GROUP $c]
+#   if {$g eq "LUT"} { incr L($k) } elseif {$g eq "FLOP_LATCH"} { incr F($k) }
+# }
+# foreach k [lsort [array names L]] { puts "GRP $k LUT=$L($k) FF=[expr {[info exists F($k)]?$F($k):0}]" }
+GRP FSM LUT=6 FF=3
+GRP a LUT=60 FF=45
+GRP a2 LUT=8 FF=18
+GRP am LUT=87 FF=29
+GRP busy LUT=1 FF=1
+GRP class LUT=2 FF=2
+GRP cycle LUT=33 FF=32
+GRP done LUT=1 FF=1
+GRP drain LUT=18 FF=8
+GRP dst LUT=12 FF=8
+GRP eng LUT=712 FF=73
+GRP f LUT=1 FF=9
+GRP fbuf LUT=350 FF=0
+GRP gap LUT=1 FF=1
+GRP ig LUT=12 FF=8
+GRP k LUT=12 FF=8
+GRP layer LUT=6 FF=4
+GRP ld LUT=11 FF=33
+GRP logits LUT=102 FF=100
+GRP og LUT=11 FF=8
+GRP p LUT=5 FF=0
+GRP pe LUT=1 FF=24
+GRP q LUT=32 FF=41
+GRP r2 LUT=62 FF=0
+GRP r3 LUT=680 FF=352
+GRP r4 LUT=673 FF=352
+GRP rowlen LUT=6 FF=5
+GRP s LUT=73 FF=0
+GRP src LUT=12 FF=8
+GRP t LUT=14 FF=8
+GRP tsp LUT=18 FF=10
+GRP u LUT=746 FF=271
+GRP w LUT=23 FF=18
+# foreach k [lsort [array names F]] { if {![info exists L($k)]} { puts "GRP $k LUT=0 FF=$F($k)" } }
+GRP acc LUT=0 FF=192
+GRP b LUT=0 FF=1
+GRP b2 LUT=0 FF=2
+GRP c LUT=0 FF=1
+GRP rn LUT=0 FF=1
+GRP rst LUT=0 FF=37
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 28 16:56:03 2026...
